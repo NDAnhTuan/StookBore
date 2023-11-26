@@ -1,5 +1,6 @@
 use sql12664900;
 
+/*------------Create Table------------*/
 CREATE TABLE Users (
     user_id VARCHAR(10) NOT NULL CHECK(LEN(user_id) <= 10 AND STRTOINT(user_id, 10) >= 0 AND PATINDEX("%[^0-9]%", user_id) = 0),
     email VARCHAR(30) NOT NULL CHECK(LEN(user_id) <= 125) ,
@@ -22,25 +23,19 @@ CREATE TABLE Users_Address (
     district VARCHAR(20) NOT NULL,
     city VARCHAR(20) NOT NULL,
     country VARCHAR(15) NOT NULL,
-    PRIMARY KEY (user_id,street,district,city,country),
-    FOREIGN KEY (user_id)
-    REFERENCES Users (user_id)
+    PRIMARY KEY (user_id,street,district,city,country)
 ); 
 
 CREATE TABLE Employees (
     user_id VARCHAR(10) NOT NULL CHECK(LEN(user_id) <= 10 AND STRTOINT(user_id, 10) >= 0 AND PATINDEX("%[^0-9]%", user_id) = 0),
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (user_id)
-    REFERENCES Users (user_id)
+    PRIMARY KEY (user_id)
 );
 
 CREATE TABLE Clients (
 	user_id VARCHAR(10) NOT NULL CHECK(LEN(user_id) <= 10 AND STRTOINT(user_id, 10) >= 0 AND PATINDEX("%[^0-9]%", user_id) = 0),
     levels INT CHECK(levels >= 0 AND levels <= 6),
     vip_point INT CHECK(vip_point >= 0),
-    PRIMARY KEY (user_id),
-    FOREIGN KEY (user_id)
-    REFERENCES Users (user_id)
+    PRIMARY KEY (user_id)
 
 );
 
@@ -48,11 +43,7 @@ CREATE TABLE Stock_Contains (
     book_id VARCHAR(10) NOT NULL,
     stock_order_id VARCHAR(10),
     quantity INT,
-    PRIMARY KEY (book_id, stock_order_id),
-    FOREIGN KEY (book_id)
-    REFERENCES Books (book_id),
-    FOREIGN KEY (stock_order_id)
-    REFERENCES Stock_Order (stock_order_id)
+    PRIMARY KEY (book_id, stock_order_id)
 );
 
 CREATE TABLE Stock_Order (
@@ -61,9 +52,7 @@ CREATE TABLE Stock_Order (
     payment_method VARCHAR(20) NOT NULL CHECK(payment_method IN ("Internet Banking","Cash")),
     paid_date DATE,
     employee_id VARCHAR(10) NOT NULL CHECK(LEN(employee_id) <= 10 AND STRTOINT(employee_id, 10) >= 0 AND PATINDEX("%[^0-9]%", employee_id) = 0),
-    PRIMARY KEY (stock_order_id),
-    FOREIGN KEY (employee_id)
-    REFERENCES Employees (user_id)
+    PRIMARY KEY (stock_order_id)
 );
 
 CREATE TABLE Books (
@@ -76,20 +65,14 @@ CREATE TABLE Books (
     current_price DECIMAL(10,2) NOT NULL CHECK (current_price > 0 AND PATINDEX("%[^0-9]%", current_price) = 0),
     edition_version INT NOT NULL CHECK(edition_version >= 0 AND PATINDEX("%[^0-9]%", edition_version) = 0),
     category_id VARCHAR(10),
-    PRIMARY KEY (book_id),
-    FOREIGN KEY (category_id)
-    REFERENCES Category (category_id)
+    PRIMARY KEY (book_id)
 );
 
 CREATE TABLE Contain (
     order_id VARCHAR(10),
     book_id VARCHAR(10),
     quantity INT,
-    PRIMARY KEY (order_id,book_id),
-    FOREIGN KEY (order_id)
-    REFERENCES Orders (order_id),
-    FOREIGN KEY (book_id)
-    REFERENCES Books (book_id)
+    PRIMARY KEY (order_id,book_id)
 );
 
 CREATE TABLE Category (
@@ -102,9 +85,7 @@ CREATE TABLE Category (
 CREATE TABLE Author_Dept (
     book_id VARCHAR(10),
     author VARCHAR(50),
-    PRIMARY KEY (book_id),
-    FOREIGN KEY (book_id)
-    REFERENCES Books (book_id)
+    PRIMARY KEY (book_id)
 );
 
 CREATE TABLE Orders (
@@ -128,11 +109,7 @@ CREATE TABLE Orders (
 CREATE TABLE Manage (
     user_id VARCHAR(10) CHECK(LEN(user_id) <= 10 AND STRTOINT(user_id, 10) >= 0 AND PATINDEX("%[^0-9]%", user_id) = 0),
     promotion_id VARCHAR(10),
-    PRIMARY KEY (user_id, promotion_id),
-    FOREIGN KEY (user_id)
-    REFERENCES Employees (user_id),
-    FOREIGN KEY (promotion_id)
-    REFERENCES Promotion (promotion_id)
+    PRIMARY KEY (user_id, promotion_id)
 
 );
 
@@ -141,11 +118,7 @@ CREATE TABLE Exchange (
     promotion_id VARCHAR(10),
     dates date,
     quantity INT,
-    PRIMARY KEY (user_id, promotion_id),
-    FOREIGN KEY (user_id)
-    REFERENCES Clients (user_id),
-    FOREIGN KEY (promotion_id)
-    REFERENCES Promotion (promotion_id)
+    PRIMARY KEY (user_id, promotion_id)
 );
 
 CREATE TABLE Promotion (
@@ -164,9 +137,7 @@ CREATE TABLE Gift (
     number_of_use INT CHECK(number_of_use >= 0),
     sale_off_amount INT,
     times_used INT CHECK(times_used >= 0),
-    PRIMARY KEY (promotion_id),
-    FOREIGN KEY (promotion_id)
-    REFERENCES Promotion (promotion_id)
+    PRIMARY KEY (promotion_id)
 );
 
 CREATE TABLE Discount (
@@ -175,17 +146,80 @@ CREATE TABLE Discount (
     sale_off_amount INT,
     max_money_sale_off INT CHECK(max_money_sale_off >= 0),
     amount INT CHECK(amount >= 1 AND amount <= 100),
-    PRIMARY KEY (promotion_id),
-    FOREIGN KEY (promotion_id)
-    REFERENCES Promotion (promotion_id)
+    PRIMARY KEY (promotion_id)
 );
 
 CREATE TABLE Apply (
     order_id VARCHAR(10),
     promotion_id VARCHAR(10),
-    PRIMARY KEY (order_id),
-    FOREIGN KEY (promotion_id)
-    REFERENCES Promotion (promotion_id),
-    FOREIGN KEY (order_id)
-    REFERENCES Orders (order_id)
+    PRIMARY KEY (order_id)
 );
+
+/*------------Add  Foreign Key------------*/
+ALTER TABLE Users_Address
+ADD FOREIGN KEY (user_id)
+    REFERENCES Users (user_id);
+
+ALTER TABLE Employees
+ADD FOREIGN KEY (user_id)
+    REFERENCES Users (user_id);
+
+ALTER TABLE Clients
+ADD FOREIGN KEY (user_id)
+    REFERENCES Users (user_id);
+
+ALTER TABLE Stock_Contains
+ADD FOREIGN KEY (book_id)
+    REFERENCES Books (book_id);
+ALTER TABLE Stock_Contains
+ADD FOREIGN KEY (stock_order_id)
+    REFERENCES Stock_Order (stock_order_id);
+
+ALTER TABLE Stock_Order
+ADD FOREIGN KEY (employee_id)
+    REFERENCES Employees (user_id);
+
+ALTER TABLE Books
+ADD FOREIGN KEY (category_id)
+    REFERENCES Category (category_id);
+
+ALTER TABLE Contain
+ADD FOREIGN KEY (order_id)
+    REFERENCES Orders (order_id);
+ALTER TABLE Contain
+ADD FOREIGN KEY (book_id)
+    REFERENCES Books (book_id);
+
+ALTER TABLE Author_Dept
+ADD FOREIGN KEY (book_id)
+    REFERENCES Books (book_id);
+
+ALTER TABLE Manage
+ADD FOREIGN KEY (user_id)
+    REFERENCES Employees (user_id);
+ALTER TABLE Manage
+ADD FOREIGN KEY (promotion_id)
+    REFERENCES Promotion (promotion_id);
+
+ALTER TABLE Exchange
+ADD FOREIGN KEY (user_id)
+    REFERENCES Clients (user_id);
+ALTER TABLE Exchange
+ADD FOREIGN KEY (promotion_id)
+    REFERENCES Promotion (promotion_id);
+
+ALTER TABLE Gift
+ADD FOREIGN KEY (promotion_id)
+    REFERENCES Promotion (promotion_id);
+
+ALTER TABLE Discount
+ADD FOREIGN KEY (promotion_id)
+    REFERENCES Promotion (promotion_id);
+
+ALTER TABLE Apply
+ADD FOREIGN KEY (promotion_id) 
+    REFERENCES Promotion (promotion_id);
+ALTER TABLE Apply
+ADD FOREIGN KEY (order_id) 
+    REFERENCES Orders (order_id);
+
