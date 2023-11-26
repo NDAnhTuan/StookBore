@@ -137,7 +137,7 @@ CREATE TABLE Manage (
 );
 
 CREATE TABLE Exchange (
-    user_id VARCHAR(10) CHECK(LEN(user_id) <= 10 AND STRTOINT(user_id, 10 AND PATINDEX("%[^0-9]%", user_id) = 0) >= 0),
+    user_id VARCHAR(10) CHECK(LEN(user_id) <= 10 AND STRTOINT(user_id, 10) >= 0 AND PATINDEX("%[^0-9]%", user_id) = 0),
     promotion_id VARCHAR(10),
     dates date,
     quantity INT,
