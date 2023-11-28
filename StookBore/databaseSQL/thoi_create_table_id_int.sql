@@ -38,6 +38,7 @@ CREATE TABLE Clients (
     PRIMARY KEY (user_id)
 );
 
+
 CREATE TABLE Stock_Contains (
     book_id INT NOT NULL CHECK(book_id >= 0),
     stock_order_id INT NOT NULL CHECK(stock_order_id >= 0),
@@ -61,7 +62,7 @@ CREATE TABLE Books (
     publisher VARCHAR(255) NOT NULL CHECK(LEN(publisher) <= 255),
     author VARCHAR(255) NOT NULL CHECK(LEN(author) <= 255),
     stock INT NOT NULL CHECK(stock >= 0),
-    current_price DECIMAL(10,2) NOT NULL CHECK (current_price > 0),
+    current_price INT NOT NULL CHECK (current_price > 0),
     edition_version INT NOT NULL CHECK(edition_version >= 0 AND PATINDEX("%[^0-9]%", edition_version) = 0),
     category_id INT NOT NULL CHECK(category_id >= 0),
     PRIMARY KEY (book_id)
@@ -140,9 +141,8 @@ CREATE TABLE Gift (
 CREATE TABLE Discount (
     promotion_id INT NOT NULL CHECK(promotion_id >= 0),
     vip_point_cost INT NOT NULL CHECK(vip_point_cost >= 0),
-    sale_off_amount DECIMAL(10,2) NOT NULL NOT NULL CHECK(sale_off_amount > 0 AND sale_off_amount <=1),
-    max_money_sale_off DECIMAL(10,2) NOT NULL CHECK(max_money_sale_off > 0),
-    amount INT NOT NULL CHECK(amount >= 1 AND amount <= 100),
+    max_money_sale_off INT NOT NULL CHECK(max_money_sale_off > 0),
+    amount DECIMAL(10,2) NOT NULL CHECK(amount > 0 AND amount <= 1),
     PRIMARY KEY (promotion_id)
 );
 
