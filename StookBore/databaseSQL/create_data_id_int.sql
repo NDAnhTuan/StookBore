@@ -107,31 +107,31 @@ VALUES ('ABC Books','Internet Banking','2023-04-01',4),
 
 
 INSERT INTO Books (title, descriptions, publisher, author, stock, current_price, edition_version, category_id)
-VALUES ('The Hitchhikers Guide to the Galaxy','A hilarious and irreverent sci-fi comedy about the meaning of life, the universe, and everything','Pan Books','Douglas Adams',50,9.99,6,1),
-       ('Harry Potter and the Philosophers Stone','The first book in the magical and adventurous series about a young wizard and his friends','Bloomsbury','J.K. Rowling',100,12.99,1,2),
-       ('The Da Vinci Code','A thrilling and controversial mystery that explores the secrets of Christianity and the Holy Grail','Doubleday','Dan Brown',80,14.99,1,3),
-       ('The Hunger Games','A dystopian and action-packed novel about a deadly reality show where teenagers fight to the death','Scholastic','Suzanne Collins',60,11.99,1,4),
-       ('The Lord of the Rings','An epic and classic fantasy saga about the quest to destroy the One Ring and save Middle-earth','Allen & Unwin','J.R.R. Tolkien',40,19.99,2,5),
-       ('The Catcher in the Rye','A controversial and influential coming-of-age story about a rebellious teenager and his alienation from society','Little, Brown and Company','J.D. Salinger',30,8.99,1,6),
-       ('To Kill a Mockingbird','A Pulitzer Prize-winning novel that deals with racism, justice, and morality in the American South','J.B. Lippincott & Co.','Harper Lee',20,10.99,1,6),
-       ('Nineteen Eighty-Four','A dystopian and political novel that warns about the dangers of totalitarianism and surveillance','Secker & Warburg','George Orwell',25,9.99,1,6),
-       ('The Kite Runner','A powerful and emotional novel that explores the themes of friendship, betrayal, and redemption in Afghanistan','Riverhead Books','Khaled Hosseini',35,13.99,1,7),
-       ('The Girl with the Dragon Tattoo','A gripping and suspenseful crime novel that involves a missing heiress, a journalist, and a hacker','Norstedts Förlag','Stieg Larsson',45,15.99,1,3),
-       ('The Fault in Our Stars','A heartbreaking and romantic novel about two teenagers who fall in love despite having terminal illnesses','Dutton Books','John Green',55,12.99,1,8),
-       ('The Alchemist','A inspirational and philosophical novel that follows the journey of a young shepherd who seeks his destiny','HarperCollins','Paulo Coelho',65,10.99,1,9),
-       ('The Chronicles of Narnia','A beloved and enchanting series of childrens fantasy novels that feature talking animals, magic, and adventure','Geoffrey Bles','C.S. Lewis',70,29.99,1,5),
-       ('The Little Prince','A charming and poetic tale that explores the themes of love, friendship, and innocence through the eyes of a young prince','Reynal & Hitchcock','Antoine de Saint-Exupéry',75,7.99,1,9),
-       ('The Shining','A terrifying and atmospheric horror novel that centers on a haunted hotel and a family in danger','Doubleday','Stephen King',85,14.99,1,10),
-       ('Pride and Prejudice','A witty and romantic novel that portrays the manners, marriage, and class in the Regency era','T. Egerton','Jane Austen',90,8.99,1,11),
-       ('Frankenstein','A Gothic and science fiction novel that tells the story of a scientist who creates a monstrous creature','Lackington, Hughes, Harding, Mavor & Jones','Mary Shelley',95,9.99,1,12),
-       ('The Hobbit','A delightful and adventurous prequel to The Lord of the Rings that follows the journey of a reluctant hobbit','George Allen & Unwin','J.R.R. Tolkien',100,9.99,4,5),
-       ('The Handmaids Tale','A dystopian and feminist novel that depicts a society where women are oppressed and enslaved','McClelland and Stewart','Margaret Atwood',105,11.99,1,13),
-       ('The Great Gatsby','A classic and tragic novel that explores the themes of wealth, love, and corruption in the Jazz Age','Charles Scribners Sons','F. Scott Fitzgerald',110,8.99,1,14),
-       ('Dune','A science fiction masterpiece that tells the story of a desert planet and its struggle for freedom and survival','Chilton Books','Frank Herbert',115,14.99,1,1),
-       ('The Lion, the Witch and the Wardrobe','The second book in The Chronicles of Narnia series that introduces the magical world of Narnia and its inhabitants','Geoffrey Bles','C.S. Lewis',120,9.99,1,5),
-       ('Sherlock Holmes: The Complete Novels and Stories','A collection of the classic detective stories that feature the brilliant and eccentric Sherlock Holmes and his loyal friend Dr. Watson','Bantam Classics','Sir Arthur Conan Doyle',125,19.99,1,3),
-       ('Brave New World','A dystopian and satirical novel that depicts a futuristic society where people are conditioned and controlled by technology and drugs','Chatto & Windus','Aldous Huxley',130,9.99,1,4),
-       ('Wuthering Heights','A Gothic and romantic novel that portrays the passionate and doomed love between Heathcliff and Catherine Earnshaw','Thomas Cautley Newby','Emily Brontë',135,8.99,1,12);
+VALUES ('The Hitchhikers Guide to the Galaxy','A hilarious and irreverent sci-fi comedy about the meaning of life, the universe, and everything','Pan Books','Douglas Adams',50,200000,6,1),
+       ('Harry Potter and the Philosophers Stone','The first book in the magical and adventurous series about a young wizard and his friends','Bloomsbury','J.K. Rowling',100,249000,1,2),
+       ('The Da Vinci Code','A thrilling and controversial mystery that explores the secrets of Christianity and the Holy Grail','Doubleday','Dan Brown',80,375000,1,3),
+       ('The Hunger Games','A dystopian and action-packed novel about a deadly reality show where teenagers fight to the death','Scholastic','Suzanne Collins',60,294000,1,4),
+       ('The Lord of the Rings','An epic and classic fantasy saga about the quest to destroy the One Ring and save Middle-earth','Allen & Unwin','J.R.R. Tolkien',40,499000,2,5),
+       ('The Catcher in the Rye','A controversial and influential coming-of-age story about a rebellious teenager and his alienation from society','Little, Brown and Company','J.D. Salinger',30,224000,1,6),
+       ('To Kill a Mockingbird','A Pulitzer Prize-winning novel that deals with racism, justice, and morality in the American South','J.B. Lippincott & Co.','Harper Lee',20,274000,1,6),
+       ('Nineteen Eighty-Four','A dystopian and political novel that warns about the dangers of totalitarianism and surveillance','Secker & Warburg','George Orwell',25,249000,1,6),
+       ('The Kite Runner','A powerful and emotional novel that explores the themes of friendship, betrayal, and redemption in Afghanistan','Riverhead Books','Khaled Hosseini',35,349000,1,7),
+       ('The Girl with the Dragon Tattoo','A gripping and suspenseful crime novel that involves a missing heiress, a journalist, and a hacker','Norstedts Förlag','Stieg Larsson',45,399000,1,3),
+       ('The Fault in Our Stars','A heartbreaking and romantic novel about two teenagers who fall in love despite having terminal illnesses','Dutton Books','John Green',55,299000,1,8),
+       ('The Alchemist','A inspirational and philosophical novel that follows the journey of a young shepherd who seeks his destiny','HarperCollins','Paulo Coelho',65,102000,1,9),
+       ('The Chronicles of Narnia','A beloved and enchanting series of childrens fantasy novels that feature talking animals, magic, and adventure','Geoffrey Bles','C.S. Lewis',70,83000,1,5),
+       ('The Little Prince','A charming and poetic tale that explores the themes of love, friendship, and innocence through the eyes of a young prince','Reynal & Hitchcock','Antoine de Saint-Exupéry',75,75000,1,9),
+       ('The Shining','A terrifying and atmospheric horror novel that centers on a haunted hotel and a family in danger','Doubleday','Stephen King',85,49000,1,10),
+       ('Pride and Prejudice','A witty and romantic novel that portrays the manners, marriage, and class in the Regency era','T. Egerton','Jane Austen',90,139000,1,11),
+       ('Frankenstein','A Gothic and science fiction novel that tells the story of a scientist who creates a monstrous creature','Lackington, Hughes, Harding, Mavor & Jones','Mary Shelley',95,249000,1,12),
+       ('The Hobbit','A delightful and adventurous prequel to The Lord of the Rings that follows the journey of a reluctant hobbit','George Allen & Unwin','J.R.R. Tolkien',100,499000,4,5),
+       ('The Handmaids Tale','A dystopian and feminist novel that depicts a society where women are oppressed and enslaved','McClelland and Stewart','Margaret Atwood',105,375000,1,13),
+       ('The Great Gatsby','A classic and tragic novel that explores the themes of wealth, love, and corruption in the Jazz Age','Charles Scribners Sons','F. Scott Fitzgerald',110,74000,1,14),
+       ('Dune','A science fiction masterpiece that tells the story of a desert planet and its struggle for freedom and survival','Chilton Books','Frank Herbert',115,88000,1,1),
+       ('The Lion, the Witch and the Wardrobe','The second book in The Chronicles of Narnia series that introduces the magical world of Narnia and its inhabitants','Geoffrey Bles','C.S. Lewis',120,110000,1,5),
+       ('Sherlock Holmes: The Complete Novels and Stories','A collection of the classic detective stories that feature the brilliant and eccentric Sherlock Holmes and his loyal friend Dr. Watson','Bantam Classics','Sir Arthur Conan Doyle',125,451000,1,3),
+       ('Brave New World','A dystopian and satirical novel that depicts a futuristic society where people are conditioned and controlled by technology and drugs','Chatto & Windus','Aldous Huxley',130,789000,1,4),
+       ('Wuthering Heights','A Gothic and romantic novel that portrays the passionate and doomed love between Heathcliff and Catherine Earnshaw','Thomas Cautley Newby','Emily Brontë',135,660000,1,12);
 
 
 INSERT INTO Category (category_name)
@@ -280,16 +280,16 @@ INSERT INTO Gift (promotion_id, number_of_use, sale_off_amount, times_used) VALU
 -- (18, 79, 0.05, 3),
 -- (19, 94, 0.25, 2);
 
-INSERT INTO Discount (promotion_id, vip_point_cost, sale_off_amount, max_money_sale_off, amount) VALUES
-(11, 70, 0.2, 60, 76),
-(12, 75, 0.15, 10, 99),
-(13, 80, 0.05, 20, 106),
-(14, 85, 0.25, 30, 83),
-(15, 90, 0.1, 40, 92),
-(16, 95, 0.2, 50, 72),
-(17, 100, 0.15, 60, 127),
-(18, 15, 0.05, 10, 79),
-(19, 20, 0.25, 20, 94);
+INSERT INTO Discount (promotion_id, vip_point_cost, max_money_sale_off, amount) VALUES
+(11, 10, 70000, 0.1),
+(12, 15, 80000, 0.15),
+(13, 20, 95000, 0.2),
+(14, 40, 150000, 0.4),
+(15, 50, 200000, 0.5),
+(16, 80, 450000, 0.8),
+(17, 100, 500000, 1),
+(18, 50, 200000, 0.5),
+(19, 40, 150000, 0.4);
 
 
 INSERT INTO Apply (order_id, promotion_id)
