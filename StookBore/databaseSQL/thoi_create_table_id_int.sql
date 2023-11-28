@@ -92,7 +92,7 @@ CREATE TABLE Orders (
     shipment_method VARCHAR(20) NOT NULL CHECK(shipment_method IN("Normal","Fast","Flash")),
     shipment_date DATE,
     shipment_price INT NOT NULL CHECK(shipment_price >= 0),
-    shipment_status INT CHECK(shipment_status IN("Fail","Success","Shipping")),
+    shipment_status INT CHECK(shipment_status IN(1,2,3)),
     street VARCHAR(255) NOT NULL CHECK(LEN(street) < 255),
     district VARCHAR(255) NOT NULL CHECK(LEN(district) < 255),
     city VARCHAR(255) NOT NULL CHECK(LEN(city) < 255),
@@ -132,7 +132,7 @@ CREATE TABLE Promotion (
 CREATE TABLE Gift (
     promotion_id INT NOT NULL CHECK(promotion_id >= 0),
     number_of_use INT NOT NULL CHECK(number_of_use >= 0),
-    sale_off_amount DOUBLE NOT NULL,
+    sale_off_amount DECIMAL(10,2) NOT NULL CHECK(sale_off_amount > 0 AND sale_off_amout <= 1),
     times_used INT NOT NULL CHECK(times_used >= 0),
     PRIMARY KEY (promotion_id)
 );
@@ -140,8 +140,8 @@ CREATE TABLE Gift (
 CREATE TABLE Discount (
     promotion_id INT NOT NULL CHECK(promotion_id >= 0),
     vip_point_cost INT NOT NULL CHECK(vip_point_cost >= 0),
-    sale_off_amount DOUBLE NOT NULL,
-    max_money_sale_off INT NOT NULL CHECK(max_money_sale_off >= 0),
+    sale_off_amount DECIMAL(10,2) NOT NULL NOT NULL CHECK(sale_off_amount > 0 AND sale_off_amount <=1),
+    max_money_sale_off DECIMAL(10,2) NOT NULL CHECK(max_money_sale_off > 0),
     amount INT NOT NULL CHECK(amount >= 1 AND amount <= 100),
     PRIMARY KEY (promotion_id)
 );
