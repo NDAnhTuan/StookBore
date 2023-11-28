@@ -91,18 +91,18 @@ VALUES (5,1,100),
 
         
 INSERT INTO Stock_Order (producer, payment_method, paid_date, employee_id)
-VALUES ('ABC Books','Internet Banking','2023-04-01',4),
-       ('XYZ Publishing','Cash','2023-04-02',10),
-       ('PQR Media','Internet Banking','2023-04-03',11),
-       ('LMN Press','Cash','2023-04-04',15),
-       ('DEF Literature','Internet Banking','2023-04-05',4),
-       ('RST Comics','Cash','2023-04-06',10),
-       ('GHI Comics','Cash','2023-04-07',10),
-       ('UVW Magazines','Internet Banking','2023-04-08',11),
-       ('EFG Newspapers','Cash','2023-04-09',15),
-       ('JKL Books','Internet Banking','2023-04-10',4),
-       ('JKL Magazines','Internet Banking','2023-04-11',11),
-       ('MNO Newspapers','Cash','2023-04-12',15);
+VALUES ('ABC Books','Internet Banking','2023-04-01',5),
+       ('XYZ Publishing','Cash','2023-04-02',11),
+       ('PQR Media','Internet Banking','2023-04-03',12),
+       ('LMN Press','Cash','2023-04-04',16),
+       ('DEF Literature','Internet Banking','2023-04-05',5),
+       ('RST Comics','Cash','2023-04-06',11),
+       ('GHI Comics','Cash','2023-04-07',11),
+       ('UVW Magazines','Internet Banking','2023-04-08',12),
+       ('EFG Newspapers','Cash','2023-04-09',16),
+       ('JKL Books','Internet Banking','2023-04-10',5),
+       ('JKL Magazines','Internet Banking','2023-04-11',12),
+       ('MNO Newspapers','Cash','2023-04-12',16);
 
 
 
