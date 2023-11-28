@@ -1,4 +1,4 @@
-use sql12664900;
+use sql12665582;
 
 CREATE TABLE Users (
     user_id INT NOT NULL AUTO_INCREMENT CHECK(user_id >= 0),

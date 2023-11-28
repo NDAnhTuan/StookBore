@@ -1,4 +1,4 @@
-use sql12664900;
+use sql12665582;
 
 INSERT INTO Users (email,password_key,first_name,last_name,phone_number,user_type)
 VALUES ('an@gmail.com','an@123','Nguyen Van','An','0112233445',FALSE),
@@ -23,7 +23,7 @@ VALUES ('an@gmail.com','an@123','Nguyen Van','An','0112233445',FALSE),
        ('y@gmail.com','y@123456','Tran Nhu','Y','0335577992',FALSE);
 
 INSERT INTO Users_Address (user_id,street,district,city,country)
-VALUES (0,'Le Duan','Quan 1','Ho Chi Minh','Viet Nam'),
+VALUES (
 		(1,'Tran Hung Dao','Ho Xa','Dong Ha','Viet Nam'),
 	   (2,'Tran Duy Hung','Vinh Lam','Ho Chi Minh','Viet Nam'),
 	   (3,'Le Thanh Tong','Vinh Chap','Ha Noi','Viet Nam'),
