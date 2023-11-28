@@ -1,20 +1,25 @@
 -- Thủ tục 1: Hiển thị thông tin sách có số lượng tồn kho lớn hơn 3, sắp xếp theo tên sách
 -- Bảng Books vs Stock_Contains
-CREATE PROCEDURE GetBooksInStockAbove3
-AS
+DELIMITER //
+
+CREATE PROCEDURE GetBooksInStockAbove3()
 BEGIN
     SELECT Books.book_id, Books.title, Books.stock
     FROM Books
     JOIN Stock_Contains ON Books.book_id = Stock_Contains.book_id
     WHERE Books.stock > 3
     ORDER BY Books.title;
-END;
+END //
+
+DELIMITER ;
+
 
 
 -- Thủ tục 2: Thống kê số lượng đơn hàng của mỗi khách hàng, chỉ hiển thị những khách hàng có số lượng đơn hàng trên 0
 -- Bảng Clients vs Orders
-CREATE PROCEDURE GetCustomerOrderCount
-AS
+DELIMITER //
+
+CREATE PROCEDURE GetCustomerOrderCount()
 BEGIN
     SELECT Clients.user_id, COUNT(Orders.order_id) AS OrderCount
     FROM Clients
@@ -22,26 +27,34 @@ BEGIN
     GROUP BY Clients.user_id
     HAVING COUNT(Orders.order_id) > 0
     ORDER BY OrderCount DESC;
-END;
+END //
+
+DELIMITER ;
 
 
 -- Thủ tục 3: Lấy thông tin đơn hàng của một khách hàng cụ thể
 -- Bảng Orders vs Clients
-CREATE PROCEDURE GetCustomerOrders
-    @ClientID VARCHAR(10)
-AS
+DELIMITER //
+
+CREATE PROCEDURE GetCustomerOrders(
+    ClientID INT(11)
+)
 BEGIN
     SELECT Orders.order_id, Orders.order_status, Orders.shipment_method, Orders.shipment_date
     FROM Orders
-    WHERE Orders.client_id = @ClientID
+    WHERE Orders.client_id = ClientID
     ORDER BY Orders.shipment_date DESC;
-END;
+END //
+
+DELIMITER ;
 
 -- Thủ tục 4: Chi tiết thông tin đơn hàng với mỗi cuốn sách và một thể loại
 -- Orders vs Contain vs Books vs Category
-CREATE PROCEDURE GetOrderDetails
-    @OrderID VARCHAR(10)
-AS
+DELIMITER //
+
+CREATE PROCEDURE GetOrderDetails(
+    OrderID INT(11)
+)
 BEGIN
     SELECT
         Orders.order_id,
@@ -65,18 +78,20 @@ BEGIN
     INNER JOIN Contain ON Orders.order_id = Contain.order_id
     INNER JOIN Books ON Contain.book_id = Books.book_id
     INNER JOIN Category ON Books.category_id = Category.category_id
-    WHERE Orders.order_id = @OrderID;
-END;
+    WHERE Orders.order_id = OrderID;
+END //
+
+DELIMITER ;
 
 
 -- Gọi thủ tục 1
-EXEC GetBooksInStockAbove3;
+CALL GetBooksInStockAbove3();
 
 -- Gọi thủ tục 2
-EXEC GetCustomerOrderCount;
+CALL GetCustomerOrderCount();
 
 -- Gọi thủ tục 3 với tham số đầu vào là ID của một khách hàng cụ thể (ví dụ: '123')
-EXEC GetCustomerOrders @ClientID = '123';
+CALL GetCustomerOrders (3);
 
 -- Gọi thủ tục chi tiết đơn hàng với mỗi cuốn sách và một thể loại với tham số đầu vào là ID của một đơn hàng cụ thể (ví dụ: 'ABC123')
-EXEC GetOrderDetails @OrderID = 'ABC123';
+CALL GetOrderDetails (4);
