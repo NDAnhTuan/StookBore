@@ -93,7 +93,7 @@ CREATE TABLE Orders (
     shipment_method VARCHAR(20) NOT NULL CHECK(shipment_method IN("Normal","Fast","Flash")),
     shipment_date DATE,
     shipment_price INT NOT NULL CHECK(shipment_price >= 0),
-    shipment_status INT CHECK(shipment_status IN(1,2,3)),
+    shipment_status INT CHECK(shipment_status IN(0,1,2,3)),
     street VARCHAR(255) NOT NULL CHECK(LEN(street) < 255),
     district VARCHAR(255) NOT NULL CHECK(LEN(district) < 255),
     city VARCHAR(255) NOT NULL CHECK(LEN(city) < 255),
