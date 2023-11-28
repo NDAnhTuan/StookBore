@@ -8,7 +8,7 @@ BEGIN
     FROM Books
     JOIN Stock_Contains ON Books.book_id = Stock_Contains.book_id
     WHERE Books.stock > 3
-    ORDER BY Books.title;
+    ORDER BY Books.book_id ASC;
 END //
 
 DELIMITER ;
@@ -26,7 +26,7 @@ BEGIN
     LEFT JOIN Orders ON Clients.user_id = Orders.client_id
     GROUP BY Clients.user_id
     HAVING COUNT(Orders.order_id) > 0
-    ORDER BY OrderCount DESC;
+    ORDER BY OrderCount DESC, Clients.user_id ASC;
 END //
 
 DELIMITER ;
@@ -40,8 +40,7 @@ CREATE PROCEDURE GetCustomerOrders(
     ClientID INT(11)
 )
 BEGIN
-    SELECT Orders.order_id, Orders.order_status, Orders.shipment_method, Orders.shipment_date
-    FROM Orders
+    SELECT * FROM Orders
     WHERE Orders.client_id = ClientID
     ORDER BY Orders.shipment_date DESC;
 END //
@@ -72,6 +71,7 @@ BEGIN
         Books.author AS book_author,
         Books.stock AS book_stock,
         Books.current_price AS book_current_price,
+        Contain.quantity,
         Books.edition_version AS book_edition_version,
         Category.category_name AS book_category
     FROM Orders
