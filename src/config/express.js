@@ -2,12 +2,20 @@ import express from 'express'
 import cors from 'cors'
 import router from '../routers/index.js'
 import {} from "dotenv/config";
-import db from "./mySql.js";
+// import db from "./mySql.js";
 
 const port =  8000
 
 const configExpressApp = async (app) => {
-	db.connect()
+
+	// try {
+	// 	db.connect()
+	// 	console.log("connect successfuly");
+	
+	// } catch (error) {
+	// 	console.log("connect failure!");
+	// }
+
 	app.set('port', port)
 	app.use(cors())
 	app.use(express.json())
