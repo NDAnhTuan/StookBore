@@ -1,4 +1,4 @@
-use sys;
+use railway;
 
 INSERT INTO Users (email,password_key,first_name,last_name,phone_number,user_type)
 VALUES ('an@gmail.com','an@123','Nguyen Van','An','0112233445',FALSE),
@@ -235,7 +235,7 @@ INSERT INTO Exchange (user_id, promotion_id, dates, quantity) VALUES
 
 
 INSERT INTO Promotion (names, start_valid_date, expired_date, quantity, promotion_type)
-VALUES  ('Black Friday Sale', '2022-11-24', '2022-11-27', 1000, TRUE),
+VALUES  ('Black Friday Sale', '2023-11-24', '2023-12-4', 1000, TRUE),
 		('Christmas Gift Card', '2022-12-01', '2022-12-31', 500, TRUE),
 		('New Year Discount', '2022-12-28', '2023-01-05', 800, TRUE),
 		('Valentines Day Special', '2023-02-01', '2023-02-14', 300, TRUE),
@@ -246,7 +246,7 @@ VALUES  ('Black Friday Sale', '2022-11-24', '2022-11-27', 1000, TRUE),
 		('Fathers Day Deal', '2023-06-11', '2023-06-20', 200, TRUE),
 		('Back to School', '2023-08-01', '2023-08-31', 500, TRUE),
 		('Halloween Treat', '2023-10-01', '2023-10-31', 300, TRUE),
-		('Thanksgiving Bonus', '2023-11-01', '2023-11-30', 400, FALSE),
+		('Thanksgiving Bonus', '2023-11-01', '2023-11-30', 400, TRUE),
 		('Winter Wonderland', '2023-12-01', '2023-12-31', 900, FALSE),
 		('Chinese New Year Celebration', '2023-01-22', '2023-02-06', 500, FALSE),
 		('Womens Day Surprise', '2023-03-01', '2023-03-08', 300, FALSE),
