@@ -4,7 +4,7 @@
 -- CALL insert_Books('Aaa','hihi','tao','jk',10,10000,7,3);
 -- use new_schema;
 use railway;
-										-- -- -- --
+-- 										-- -- -- --
 										-- 	Users --
                                         -- -- -- --
 
@@ -46,6 +46,11 @@ BEGIN
   IF NOT REGEXP_LIKE(cphone_number, '^[0-9]*$') OR SUBSTRING(cphone_number, 1, 1) != '0' OR LENGTH(cphone_number) != 10 THEN
     SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT =  "Phone must be all numbers and start with 0";
+  END IF;
+  
+    IF EXISTS (SELECT 1 FROM Users WHERE phone_number = cphone_number) THEN 
+	  SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = "This phone number already been used";
   END IF;
   
   -- Check if user type is valid
@@ -129,9 +134,6 @@ BEGIN
 END;
 //
 DELIMITER
-
-
-
 										-- -- -- --
 										-- 	Orders --
                                         -- -- -- --
@@ -241,8 +243,7 @@ BEGIN
 
 END;
 //
-DELIMITER 
-
+DELIMITER
 										-- -- -- --
 										--  Books --
                                         -- -- -- --
