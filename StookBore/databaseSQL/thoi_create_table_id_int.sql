@@ -11,7 +11,7 @@ CREATE TABLE Users (
                                     AND REGEXP_LIKE(password_key, "[^a-zA-Z0-9 ]") = TRUE),
     first_name VARCHAR(125) NOT NULL CHECK(LENGTH(first_name) <= 125) ,
     last_name VARCHAR(125) NOT NULL CHECK(LENGTH(last_name) <= 125) ,
-    phone_number VARCHAR(10) NOT NULL CHECK(SUBSTRING(phone_number, 1, 1) = '0' AND LENGTH(phone_number) = 10),
+    phone_number VARCHAR(10) NOT NULL CHECK(REGEXP_LIKE(phone_number, '^[0-9]*$') AND SUBSTRING(phone_number, 1, 1) = '0' AND LENGTH(phone_number) = 10),
     user_type BOOLEAN NOT NULL CHECK(user_type IN (TRUE, FALSE)),
     PRIMARY KEY (user_id)
 ) AUTO_INCREMENT = 0;
