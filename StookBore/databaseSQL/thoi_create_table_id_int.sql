@@ -1,4 +1,5 @@
-use sys;
+-- use new_schema;
+use railway;
 
 CREATE TABLE Users (
     user_id INT NOT NULL AUTO_INCREMENT,
@@ -12,6 +13,7 @@ CREATE TABLE Users (
     first_name VARCHAR(125) NOT NULL CHECK(LENGTH(first_name) <= 125) ,
     last_name VARCHAR(125) NOT NULL CHECK(LENGTH(last_name) <= 125) ,
     phone_number VARCHAR(10) NOT NULL CHECK(REGEXP_LIKE(phone_number, '^[0-9]*$') AND SUBSTRING(phone_number, 1, 1) = '0' AND LENGTH(phone_number) = 10),
+--     If the user_type is TRUE means it is Employee, else it is Clients
     user_type BOOLEAN NOT NULL CHECK(user_type IN (TRUE, FALSE)),
     PRIMARY KEY (user_id)
 ) AUTO_INCREMENT = 0;
@@ -33,8 +35,8 @@ CREATE TABLE Employees (
 
 CREATE TABLE Clients (
     user_id INT NOT NULL,
-    levels INT NOT NULL CHECK(levels >= 0 AND levels <= 6),
-    vip_point INT NOT NULL CHECK(vip_point >= 0),
+    levels INT NOT NULL CHECK(levels >= 0 AND levels <= 6) DEFAULT 0,
+    vip_point INT NOT NULL CHECK(vip_point >= 0) DEFAULT 0,
     PRIMARY KEY (user_id)
 );
 
@@ -63,17 +65,10 @@ CREATE TABLE Books (
     author VARCHAR(255) NOT NULL CHECK(LENGTH(author) <= 255),
     stock INT NOT NULL CHECK(stock >= 0),
     current_price INT NOT NULL CHECK (current_price > 0),
-    edition_version INT NOT NULL CHECK(edition_version >= 0),
+    edition_version INT NOT NULL CHECK(edition_version >= 0) DEFAULT 1,
     category_id INT NOT NULL,
     PRIMARY KEY (book_id)
 ) AUTO_INCREMENT = 0;
-
-CREATE TABLE Contain (
-    order_id INT NOT NULL,
-    book_id INT NOT NULL,
-    quantity INT NOT NULL CHECK(quantity >=0),
-    PRIMARY KEY (order_id,book_id)
-);
 
 CREATE TABLE Category (
     category_id INT NOT NULL AUTO_INCREMENT,
@@ -85,6 +80,13 @@ CREATE TABLE Author_Dept (
     book_id INT NOT NULL,
     author VARCHAR(50) NOT NULL CHECK(LENGTH(author) <= 50),
     PRIMARY KEY (book_id)
+);
+
+CREATE TABLE Contain (
+    order_id INT NOT NULL,
+    book_id INT NOT NULL,
+    quantity INT NOT NULL CHECK(quantity >=0),
+    PRIMARY KEY (order_id,book_id)
 );
 
 CREATE TABLE Orders (
