@@ -15,6 +15,7 @@ async function getBooks({
     }
     
     if (searchTitle) {
+        searchTitle = searchTitle.trim()
         conditions.push(`title LIKE '%${searchTitle}%'`);
     }
 
