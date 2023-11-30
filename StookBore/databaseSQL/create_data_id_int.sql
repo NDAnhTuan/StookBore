@@ -1,5 +1,5 @@
-use sql12665582;
-select * from Employees;
+use sys;
+
 INSERT INTO Users (email,password_key,first_name,last_name,phone_number,user_type)
 VALUES ('an@gmail.com','an@123','Nguyen Van','An','0112233445',FALSE),
 	   ('bao@gmail.com','bao@123','Le Duc','Bao','0223344556',FALSE),
@@ -45,27 +45,11 @@ VALUES (1,'Le Duan','Quan 1','Ho Chi Minh','Viet Nam'),
 		(20,'Nguyen Thi Minh Khai','Quan 1','Ho Chi Minh','Viet Nam');
 
 INSERT INTO Employees(user_id)
-VALUES (1),
-	   (2),
-       (3),
-       (4),
-       (5),
-	   (6),
-       (7),
-       (8),
-       (9),
-	   (10),
-       (11),
+VALUES (5),
+	   (11),
        (12),
-       (13),
-       (14),
-       (15),
-       (16),
-       (17),
-       (18),
-       (19),
-       (20);
-select * from Employees;
+       (16);
+	
 INSERT INTO Clients (user_id,levels,vip_point)
 VALUES (1,5,190),
 		(2,0,0),
@@ -106,18 +90,18 @@ VALUES (5,1,100),
        (25, 10, 600);
 
 INSERT INTO Stock_Order (producer, payment_method, paid_date, employee_id)
-VALUES ('ABC Books','Internet Banking','2023-04-01',4),
-       ('XYZ Publishing','Cash','2023-04-02',10),
-       ('PQR Media','Internet Banking','2023-04-03',11),
-       ('LMN Press','Cash','2023-04-04',15),
-       ('DEF Literature','Internet Banking','2023-04-05',4),
-       ('RST Comics','Cash','2023-04-06',10),
-       ('GHI Comics','Cash','2023-04-07',10),
-       ('UVW Magazines','Internet Banking','2023-04-08',11),
-       ('EFG Newspapers','Cash','2023-04-09',15),
-       ('JKL Books','Internet Banking','2023-04-10',4),
-       ('JKL Magazines','Internet Banking','2023-04-11',11),
-       ('MNO Newspapers','Cash','2023-04-12',15);
+VALUES ('ABC Books','Internet Banking','2023-04-01',5),
+       ('XYZ Publishing','Cash','2023-04-02',11),
+       ('PQR Media','Internet Banking','2023-04-03',12),
+       ('LMN Press','Cash','2023-04-04',16),
+       ('DEF Literature','Internet Banking','2023-04-05',5),
+       ('RST Comics','Cash','2023-04-06',11),
+       ('GHI Comics','Cash','2023-04-07',11),
+       ('UVW Magazines','Internet Banking','2023-04-08',12),
+       ('EFG Newspapers','Cash','2023-04-09',16),
+       ('JKL Books','Internet Banking','2023-04-10',5),
+       ('JKL Magazines','Internet Banking','2023-04-11',12),
+       ('MNO Newspapers','Cash','2023-04-12',16);
 
 
 
@@ -198,7 +182,7 @@ VALUES ('Success','Normal','2023-05-01',10,2,'123 Main Street','District 1','Ho 
        ('Success','Fast','2023-05-02',20,2,'456 Second Avenue','District 2','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-02',2),
        ('Success','Flash','2023-05-03',30,2,'789 Third Boulevard','District 3','Ho Chi Minh City','Vietnam','Cash','2023-04-03',1),
        ('Success','Normal','2023-05-04',10,2,'101 Fourth Lane','District 4','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-04',3),
-       ('Success','Fast','2023-05-05',20,2,'102 Fifth Street','District 5','Ho Chi Minh City','Vietnam','Cash','2023-04-05',12),
+       ('Success','Fast','2023-05-05',20,2,'102 Fifth Street','District 5','Ho Chi Minh City','Vietnam','Cash','2023-04-05',13),
        ('Success','Flash','2023-05-06',30,2,'103 Sixth Avenue','District 6','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-06',9),
        ('Success','Normal','2023-05-07',10,2,'104 Seventh Boulevard','District 7','Ho Chi Minh City','Vietnam','Cash','2023-04-07',7),
        ('Success','Fast','2023-05-08',20,2,'105 Eighth Lane','District 8','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-08',17),
@@ -250,25 +234,25 @@ INSERT INTO Exchange (user_id, promotion_id, dates, quantity) VALUES
 
 
 INSERT INTO Promotion (names, start_valid_date, expired_date, quantity, promotion_type)
-VALUES  ('Black Friday Sale', '2022-11-24', '2022-11-27', 1000, TRUE),
-		('Christmas Gift Card', '2022-12-01', '2022-12-31', 500, FALSE),
+VALUES  ('Black Friday Sale', '2023-11-24', '2023-12-4', 1000, TRUE),
+		('Christmas Gift Card', '2022-12-01', '2022-12-31', 500, TRUE),
 		('New Year Discount', '2022-12-28', '2023-01-05', 800, TRUE),
-		('Valentines Day Special', '2023-02-01', '2023-02-14', 300, FALSE),
+		('Valentines Day Special', '2023-02-01', '2023-02-14', 300, TRUE),
 		('Spring Clearance', '2023-03-01', '2023-03-31', 600, TRUE),
-		('Easter Giveaway', '2023-04-10', '2023-04-17', 400, FALSE),
-		('Mothers Day Offer', '2023-05-01', '2023-05-10', 200, FALSE),
+		('Easter Giveaway', '2023-04-10', '2023-04-17', 400, TRUE),
+		('Mothers Day Offer', '2023-05-01', '2023-05-10', 200, TRUE),
 		('Summer Sale', '2023-06-01', '2023-06-30', 700, TRUE),
-		('Fathers Day Deal', '2023-06-11', '2023-06-20', 200, FALSE),
+		('Fathers Day Deal', '2023-06-11', '2023-06-20', 200, TRUE),
 		('Back to School', '2023-08-01', '2023-08-31', 500, TRUE),
-		('Halloween Treat', '2023-10-01', '2023-10-31', 300, FALSE),
+		('Halloween Treat', '2023-10-01', '2023-10-31', 300, TRUE),
 		('Thanksgiving Bonus', '2023-11-01', '2023-11-30', 400, TRUE),
-		('Winter Wonderland', '2023-12-01', '2023-12-31', 900, TRUE),
+		('Winter Wonderland', '2023-12-01', '2023-12-31', 900, FALSE),
 		('Chinese New Year Celebration', '2023-01-22', '2023-02-06', 500, FALSE),
 		('Womens Day Surprise', '2023-03-01', '2023-03-08', 300, FALSE),
 		('St. Patricks Day Lucky Draw', '2023-03-10', '2023-03-17', 200, FALSE),
 		('Earth Day Awareness', '2023-04-01', '2023-04-22', 100, FALSE),
-		('Independence Day Extravaganza', '2023-07-01', '2023-07-04', 400, TRUE),
-		('Labor Day Reward', '2023-09-01', '2023-09-07', 300, TRUE),
+		('Independence Day Extravaganza', '2023-07-01', '2023-07-04', 400, FALSE),
+		('Labor Day Reward', '2023-09-01', '2023-09-07', 300, FALSE),
 		('Veterans Day Tribute', '2023-11-01', '2023-11-11', 200, FALSE);
 
 
@@ -313,4 +297,4 @@ VALUES (8,2),
        (3,7),
        (2,5),
        (7,3),
-       (5,13);
+       (5,12);

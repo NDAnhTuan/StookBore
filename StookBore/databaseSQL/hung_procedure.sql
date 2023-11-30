@@ -37,7 +37,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE GetCustomerOrders(
-    ClientID INT(11)
+    ClientID INT
 )
 BEGIN
     SELECT * FROM Orders
@@ -52,7 +52,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE PROCEDURE GetOrderDetails(
-    OrderID INT(11)
+    OrderID INT
 )
 BEGIN
     SELECT
