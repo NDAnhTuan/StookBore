@@ -1,5 +1,5 @@
 -- use new_schema;
--- CALL delete_Book(25);
+-- CALL delete_Book(3);
 use railway;
 -- Delete Book procedure
 DELIMITER //
