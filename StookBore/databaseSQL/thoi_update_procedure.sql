@@ -305,7 +305,8 @@ BEGIN
   WHERE order_id = p_order_id;
 
 END;
-
+//
+DELIMITER
 										-- -- -- --
 										--  Books --
                                         -- -- -- --
@@ -403,6 +404,3 @@ BEGIN
   WHERE book_id = p_book_id;
 END;
 
-//
-
-DELIMITER ;
