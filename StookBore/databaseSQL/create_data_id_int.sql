@@ -1,4 +1,5 @@
-use sys;
+use new_schema;
+-- use railway;
 
 INSERT INTO Users (email,password_key,first_name,last_name,phone_number,user_type)
 VALUES ('an@gmail.com','an@123','Nguyen Van','An','0112233445',FALSE),
@@ -89,6 +90,7 @@ VALUES (5,1,100),
        (24, 9, 500),
        (25, 10, 600);
 
+        
 INSERT INTO Stock_Order (producer, payment_method, paid_date, employee_id)
 VALUES ('ABC Books','Internet Banking','2023-04-01',5),
        ('XYZ Publishing','Cash','2023-04-02',11),
@@ -152,41 +154,40 @@ VALUES ('Science Fiction'),
 INSERT INTO Contain (order_id, book_id, quantity)
 VALUES (1,1,2),
        (1,4,1),
-       (1,8,3),
-       (2,3,2),
-       (2,7,1),
+
+
        (2,9,2),
        (3,2,1),
-       (3,6,2),
+
        (3,14,1),
        (4,5,3),
        (4,10,2),
        (4,15,1),
-       (5,1,2),
+
        (5,11,1),
        (5,12,3),
-       (6,13,2),
+
        (6,16,1),
        (6,17,2),
        (7,18,1),
-       (7,19,2),
+
        (7,20,1),
        (8,21,3),
        (8,22,2),
-       (8,23,1),
+
        (9,24,2);
 
 
 INSERT INTO Orders (order_status, shipment_method, shipment_date, shipment_price, shipment_status, street, district, city, country, payment_method, paid_date, client_id)
-VALUES ('Success','Normal','2023-05-01',10,2,'123 Main Street','District 1','Ho Chi Minh City','Vietnam','Cash','2023-04-01',6),
-       ('Success','Fast','2023-05-02',20,2,'456 Second Avenue','District 2','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-02',2),
-       ('Success','Flash','2023-05-03',30,2,'789 Third Boulevard','District 3','Ho Chi Minh City','Vietnam','Cash','2023-04-03',1),
-       ('Success','Normal','2023-05-04',10,2,'101 Fourth Lane','District 4','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-04',3),
-       ('Success','Fast','2023-05-05',20,2,'102 Fifth Street','District 5','Ho Chi Minh City','Vietnam','Cash','2023-04-05',13),
-       ('Success','Flash','2023-05-06',30,2,'103 Sixth Avenue','District 6','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-06',9),
-       ('Success','Normal','2023-05-07',10,2,'104 Seventh Boulevard','District 7','Ho Chi Minh City','Vietnam','Cash','2023-04-07',7),
-       ('Success','Fast','2023-05-08',20,2,'105 Eighth Lane','District 8','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-08',17),
-       ('Success','Flash','2023-05-09',30,2,'106 Ninth Street','District 9','Ho Chi Minh City','Vietnam','Cash','2023-04-09',19);
+VALUES ('Success','Normal','2023-05-01',10000,2,'123 Main Street','District 1','Ho Chi Minh City','Vietnam','Cash','2023-04-01',6),
+       ('Success','Fast','2023-05-02',20000,2,'456 Second Avenue','District 2','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-02',2),
+       ('Success','Flash','2023-05-03',30000,2,'789 Third Boulevard','District 3','Ho Chi Minh City','Vietnam','Cash','2023-04-03',1),
+       ('Success','Normal','2023-05-04',10000,2,'101 Fourth Lane','District 4','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-04',3),
+       ('Success','Fast','2023-05-05',20000,2,'102 Fifth Street','District 5','Ho Chi Minh City','Vietnam','Cash','2023-04-05',13),
+       ('Success','Flash','2023-05-06',30000,2,'103 Sixth Avenue','District 6','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-06',9),
+       ('Success','Normal','2023-05-07',10000,2,'104 Seventh Boulevard','District 7','Ho Chi Minh City','Vietnam','Cash','2023-04-07',7),
+       ('Success','Fast','2023-05-08',20000,2,'105 Eighth Lane','District 8','Ho Chi Minh City','Vietnam','Internet Banking','2023-04-08',17),
+       ('Success','Flash','2023-05-09',30000,2,'106 Ninth Street','District 9','Ho Chi Minh City','Vietnam','Cash','2023-04-09',19);
 
 INSERT INTO Author_Dept (book_id, author)
 SELECT book_id, author FROM Books;
