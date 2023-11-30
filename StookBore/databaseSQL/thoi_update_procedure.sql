@@ -306,8 +306,6 @@ BEGIN
 
 END;
 
-CALL update_Orders(9, 'Success', 'Fast', '2023-07-13', 2023, 2, NULL, NULL, NULL, NULL, 'Cash', '2023-07-12', 2, NULL, NULL);
-
 										-- -- -- --
 										--  Books --
                                         -- -- -- --
