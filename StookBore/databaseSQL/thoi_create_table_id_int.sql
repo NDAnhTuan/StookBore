@@ -1,5 +1,5 @@
--- use new_schema;
-use railway;
+use new_schema;
+-- use railway;
 
 CREATE TABLE Users (
     user_id INT NOT NULL AUTO_INCREMENT,
@@ -35,8 +35,8 @@ CREATE TABLE Employees (
 
 CREATE TABLE Clients (
     user_id INT NOT NULL,
-    levels INT NOT NULL CHECK(levels >= 0 AND levels <= 6) DEFAULT 0,
-    vip_point INT NOT NULL CHECK(vip_point >= 0) DEFAULT 0,
+    levels INT NOT NULL  DEFAULT 0 CHECK(levels >= 0 AND levels <= 6),
+    vip_point INT NOT NULL DEFAULT 0  CHECK(vip_point >= 0),
     PRIMARY KEY (user_id)
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE Books (
     author VARCHAR(255) NOT NULL CHECK(LENGTH(author) <= 255),
     stock INT NOT NULL CHECK(stock >= 0),
     current_price INT NOT NULL CHECK (current_price > 0),
-    edition_version INT NOT NULL CHECK(edition_version >= 0) DEFAULT 1,
+    edition_version INT NOT NULL DEFAULT 1 CHECK(edition_version >= 0) ,
     category_id INT NOT NULL,
     PRIMARY KEY (book_id)
 ) AUTO_INCREMENT = 0;
