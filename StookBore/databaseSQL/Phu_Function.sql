@@ -70,6 +70,7 @@ BEGIN
 	DECLARE discount_amount DECIMAL(10,2);
 	DECLARE max_discount DECIMAL(10,2);
 	DECLARE discount_rate DECIMAL(10,2);
+    DECLARE shipmentPrice INT;
 
     DECLARE cur CURSOR FOR 
         SELECT o.order_id 
@@ -110,7 +111,12 @@ BEGIN
 				SET cur_total = cur_total - discount_amount;
 			END IF;
 		END IF;
-
+        
+		-- add shipment price
+        SELECT shipment_price INTO shipmentPrice
+        FROM Orders
+        WHERE order_id = cur_order_id;
+        SET cur_total = cur_total + shipmentPrice * 1000;
         SET total = total + cur_total;
     END LOOP;
     CLOSE cur;
@@ -121,3 +127,4 @@ DELIMITER ;
 
 -- test
 SELECT TotalCustomerPurchase(1); 
+SELECT * from Books;
