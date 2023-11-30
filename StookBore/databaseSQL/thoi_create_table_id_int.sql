@@ -1,5 +1,5 @@
-use new_schema;
--- use railway;
+-- use new_schema;
+use railway;
 
 CREATE TABLE Users (
     user_id INT NOT NULL AUTO_INCREMENT,

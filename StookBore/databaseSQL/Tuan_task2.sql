@@ -74,7 +74,18 @@ BEGIN
                     SELECT
 						sub_total*(1 - amount_grant) + ship_temp
 					FROM grand_total_view WHERE order_id = NEW.order_id);
-
+					IF amount_grant THEN
+						BEGIN
+							DECLARE times_used_num DOUBLE DEFAULT 0;
+							SET times_used_num = (
+								SELECT
+								times_used + 1
+							FROM Gift WHERE promotion_id = NEW.promotion_id);
+							UPDATE  Gift
+							SET times_used = times_used_num
+							WHERE promotion_id = NEW.promotion_id;
+                        END;
+                    END IF;
                     UPDATE  grand_total_view
                     SET grand_total = grant_temp
                     WHERE order_id = NEW.order_id;
