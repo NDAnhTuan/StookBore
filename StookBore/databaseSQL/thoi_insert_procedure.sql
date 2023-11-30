@@ -59,6 +59,18 @@ BEGIN
 			SET MESSAGE_TEXT =  "Client user type must be FALSE";
 	 END IF;
      
+     -- Check if level valid
+     IF NOT (clevel >= 0 AND clevel <= 6) THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT =  "Level must be from 0 to 6";
+	 END IF;
+     
+	-- Check if vip point non-negative
+     IF NOT cvip_point >= 0 THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT =  "Vip point must be non-negative";
+	 END IF;
+     
  -- Insert data if all validations pass
   INSERT INTO Users (email, password_key, first_name, last_name, phone_number, user_type)
   VALUES (cemail, cpassword_key, cfirst_name, clast_name, cphone_number, cuser_type);
