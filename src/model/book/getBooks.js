@@ -3,7 +3,9 @@ import connection from "#~/config/mySql.js";
 async function getBooks({
     category_id,
     sortByPrice,
-    searchTitle
+    searchTitle,
+    per_page,
+    current_page
 }) {
     sortByPrice = sortByPrice === -1 ? 'DESC' : 'ASC';
 
@@ -28,6 +30,10 @@ async function getBooks({
     if (sortByPrice) {
         query += ` ORDER BY current_price ${sortByPrice}`;
     }
+
+    // // Add LIMIT and OFFSET for pagination
+    const offset = (current_page - 1) * per_page;
+    query += ` LIMIT ${per_page} OFFSET ${offset}`;
 
     const [result, fields] = await connection.query(query);
     return result;
