@@ -33,7 +33,7 @@ async function getSingleOrder({
         }
     }
 
-    details.map((book) => {
+    details = details.map((book) => {
         const {
             book_id,
             book_title,
