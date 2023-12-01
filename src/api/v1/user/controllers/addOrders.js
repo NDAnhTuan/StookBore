@@ -4,7 +4,6 @@ const addOrders = async (req, res, next) => {
     try {
         
         const {
-            order_id,
             order_status,
             shipment_method,
             shipment_date,
@@ -23,7 +22,6 @@ const addOrders = async (req, res, next) => {
 
         const data = await new Order().addOrders({
             
-            order_id,
             order_status,
             shipment_method,
             shipment_date,

@@ -1,8 +1,6 @@
 import connection from "#~/config/mySql.js"
 
-
 async function addOrders({
-    order_id,
     order_status,
     shipment_method,
     shipment_date,
@@ -19,26 +17,30 @@ async function addOrders({
     books // [  {book_id, quantity}, ......]
 }) {
 
+    await connection.query(
+
+        'CALL insert_Orders(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          order_status,
+          shipment_method,
+          shipment_date,
+          shipment_price,
+          shipment_status,
+          street,
+          district,
+          city,
+          country,
+          payment_method,
+          paid_date,
+          client_id,
+          JSON.stringify(books) 
+        ],
+    )
+
+    return {
+        message: "Order successfully"
+    }
 
 }   
 
 export default addOrders
-
-// p_books = {
-//     books: [
-//         {
-//             book_id: 1,
-//             quantity: 3
-//         },
-
-//         {
-//             book_id: 1,
-//             quantity: 3
-//         },
-
-//         {
-//             book_id: 1,
-//             quantity: 3
-//         }
-//     ]
-// }
