@@ -14,14 +14,6 @@ const addBook = async (req, res, next) => {
         } = req.body
 
         const data = await new Book().addBook({
-            // title,
-            // descriptions,
-            // publisher,
-            // author,
-            // stock: parseInt(stock),
-            // current_price: parseInt(current_price),
-            // edition_version: parseInt(edition_version),
-            // category_id: parseInt(category_id)
             title,
             descriptions,
             publisher,
