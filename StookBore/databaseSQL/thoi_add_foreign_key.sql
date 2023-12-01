@@ -1,5 +1,5 @@
--- use new_schema;
-use railway;
+use new_schema;
+-- use railway;
 
 ALTER TABLE Users_Address
 ADD FOREIGN KEY (user_id) REFERENCES Users (user_id);
@@ -25,7 +25,7 @@ ADD FOREIGN KEY (order_id) REFERENCES Orders (order_id),
 ADD FOREIGN KEY (book_id) REFERENCES Books (book_id);
 
 ALTER TABLE Author_Dept
-ADD FOREIGN KEY (book_id) REFERENCES Books (book_id);
+ADD FOREIGN KEY (book_id) REFERENCES Books (book_id) ON DELETE CASCADE;
 
 ALTER TABLE Orders
 ADD FOREIGN KEY (client_id) REFERENCES Clients (user_id);
