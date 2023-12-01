@@ -1,38 +1,37 @@
 import Order from "#~/model/order/index.js"
+import DateNow from "./dateService.js"
 
 const addOrders = async (req, res, next) => {
     try {
         
         const {
-            order_status,
             shipment_method,
-            shipment_date,
             shipment_price,
-            shipment_status,
             street,
             district,
             city,
             country,
             payment_method,
-            paid_date,
             client_id,
 
             books // [  {bool_id, quantity}, ......]
         } = req.body
 
+        const now = DateNow()
+
         const data = await new Order().addOrders({
             
-            order_status,
+            order_status: "Processing",
             shipment_method,
-            shipment_date,
+            shipment_date: now,
             shipment_price,
-            shipment_status,
+            shipment_status: 0,
             street,
             district,
             city,
             country,
             payment_method,
-            paid_date,
+            paid_date: now,
             client_id,
 
             books // [  {bool_id, quantity}, ......]
