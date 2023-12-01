@@ -14,10 +14,26 @@ CREATE TEMPORARY TABLE grand_total_view (
 
 SELECT *
    FROM grand_total_view;
-  
- delimiter // 
-CREATE TRIGGER order_update_grand_total
+
+delimiter // 
+CREATE TRIGGER create_grand_total_view
 AFTER INSERT ON Orders
+FOR EACH ROW
+BEGIN
+DECLARE ship_temp DOUBLE DEFAULT 0;
+
+SET ship_temp = (
+	SELECT
+		shipment_price
+	FROM Orders WHERE order_id = NEW.order_id);
+INSERT INTO grand_total_view (order_id, sub_total, grand_total)
+VALUES ( NEW.order_id, 0, ship_temp);
+END //
+delimiter ;
+
+delimiter // 
+CREATE TRIGGER order_update_grand_total
+AFTER INSERT ON Contain
 FOR EACH ROW
 BEGIN
 DECLARE temp INT DEFAULT 0;
@@ -32,8 +48,9 @@ SET ship_temp = (
 	SELECT
 		shipment_price
 	FROM Orders WHERE order_id = NEW.order_id);
-	INSERT INTO grand_total_view (order_id, sub_total, grand_total)
-    VALUES ( NEW.order_id, temp, temp + ship_temp);
+	UPDATE  grand_total_view
+	SET grand_total = temp + ship_temp, sub_total = temp
+	WHERE order_id = NEW.order_id;
 END //
 delimiter ;
 
