@@ -64,6 +64,7 @@ img {
 .top-banner {
     text-align: center;
     background-color: #0F60A1;
+    display: none;
 }
 
 .mouse-hover {
@@ -91,6 +92,7 @@ img {
     background-size: contain;
     width: 220px;
     height: 36px;
+    margin-right: 60px;
 }
 
 .top-bar-category {
@@ -308,7 +310,7 @@ img {
 }
 
 .top-bar-search-container:hover .top-bar-search-info {
-    display: flex;
+    display: none;
     
 }
     
@@ -880,11 +882,11 @@ img {
 }
 
 .new-label-pro-sale {
+    display: none;
     background-color: #F7941E;
     width: 44px;
     height: 44px;
     border-radius: 22px;
-    display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -937,10 +939,12 @@ img {
 }
 
 .progress {
+    display: flex;
+    justify-content: space-between;
     position: relative;
-    height: 18px;
+    height: 30px;
     border-radius: 15px;
-    background-color: rgba(210, 33, 33, 0.4);
+    /* background-color: rgba(210, 33, 33, 0.4); */
     margin-left: 2%;
     margin-right: 2%;
     width: 96%;
@@ -949,6 +953,7 @@ img {
 }
 
 .progress-bar {
+    display: none;
     position: absolute;
     background-color: #D22121;
     border-radius: 15px;
@@ -956,6 +961,7 @@ img {
 }
 
 .progress span {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -1204,7 +1210,7 @@ img {
 }
 
 .ratingbox {
-    display: flex;
+    display: none;
     align-items: flex-start;
     justify-content: center;
     margin-top: 10px;
@@ -1289,7 +1295,7 @@ img {
 .dangkynhanbantin {
     width: 100%;
     margin-top: 20px;
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -1349,9 +1355,10 @@ img {
 }
 
 .footer-container {
-    background-color: white;
+    background-color: burlywood;
+    display: none;
     width: 100%;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 20px;

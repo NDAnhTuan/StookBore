@@ -142,12 +142,18 @@
 }
 
 .sapxeptheo {
+    position: relative;
     display: flex;
     width: 100%;
     padding: 30px;
     border-bottom: 1px solid #E5E5E5;
     justify-content: flex-start;
     align-items: center;
+}
+
+.sapxeptheo button {
+    position: absolute;
+    right: 30px;
 }
 
 .sapxeptheo .selectbox-dropdown-macdinh {
@@ -269,6 +275,7 @@
 }
 
 .lamdepi-price-old {
+    display: none;
     color: #888888;
     text-decoration: line-through;
     font-size: 0.9em;
