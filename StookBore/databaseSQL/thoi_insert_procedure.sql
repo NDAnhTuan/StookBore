@@ -152,7 +152,7 @@ DELIMITER
 -- Insert Orders procedure
 DELIMITER //
 
-CREATE PROCEDURE insert_Order(
+CREATE PROCEDURE insert_Orders(
   IN p_order_status VARCHAR(50),
   IN p_shipment_method VARCHAR(20),
   IN p_shipment_date DATE,
@@ -165,12 +165,15 @@ CREATE PROCEDURE insert_Order(
   IN p_payment_method VARCHAR(20),
   IN p_paid_date DATE,
   IN p_client_id INT,
-  IN p_book_id INT,
-  IN p_quantity INT
+  IN p_books_and_quantities JSON
 )
 BEGIN
   DECLARE error_message VARCHAR(255);
   DECLARE last_order_id INT;
+  DECLARE i INT DEFAULT 0;
+  DECLARE total_books INT;
+  DECLARE book_id_var INT;
+  DECLARE quantity_var INT;
 
   -- Check if order status is valid
   IF NOT (p_order_status IN ('Fail', 'Success', 'Processing')) THEN
@@ -227,19 +230,6 @@ BEGIN
     SIGNAL SQLSTATE '45000'
     SET MESSAGE_TEXT = error_message;
   END IF;
-  
-    -- Check if book_id exists 
-  IF NOT EXISTS (SELECT 1 FROM Books WHERE book_id = p_book_id) THEN
-    SET error_message = 'Invalid book_id';
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = error_message;
-  END IF;
-  
-  IF NOT (p_quantity >= 0) THEN
-    SET error_message = 'Quantity must be non-negative';
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = error_message;
-  END IF;
 
   -- If all validations pass, insert data into Orders table
   INSERT INTO Orders (
@@ -249,13 +239,26 @@ BEGIN
     p_order_status, p_shipment_method, p_shipment_date, p_shipment_price, p_shipment_status,
     p_street, p_district, p_city, p_country, p_payment_method, p_paid_date, p_client_id
   );
-  
+
   SET last_order_id = LAST_INSERT_ID();
-  INSERT INTO Contain ( order_id, book_id, quantity ) VALUES (last_order_id, p_book_id, p_quantity);
+  SET total_books = JSON_LENGTH(p_books_and_quantities);
+
+  -- Iterate through the JSON array and insert into Contain table
+  WHILE i < total_books DO
+    SET book_id_var = CAST(JSON_UNQUOTE(JSON_EXTRACT(p_books_and_quantities, CONCAT('$[', i, '].book_id'))) AS UNSIGNED);
+    SET quantity_var = CAST(JSON_UNQUOTE(JSON_EXTRACT(p_books_and_quantities, CONCAT('$[', i, '].quantity'))) AS UNSIGNED);
+
+    INSERT INTO Contain (order_id, book_id, quantity)
+    VALUES (last_order_id, book_id_var, quantity_var);
+
+    SET i = i + 1;
+  END WHILE;
 
 END;
 //
+
 DELIMITER
+
 										-- -- -- --
 										--  Books --
                                         -- -- -- --

@@ -1,5 +1,5 @@
-use new_schema;
--- use railway;
+-- use new_schema;
+use railway;
 
 INSERT INTO Users (email,password_key,first_name,last_name,phone_number,user_type)
 VALUES ('an@gmail.com','an@123','Nguyen Van','An','0112233445',FALSE),
