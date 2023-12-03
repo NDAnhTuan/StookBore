@@ -5,6 +5,7 @@ async function getSingleOrder({
 }) {
     let query = `CALL GetOrderDetails(${order_id})`
     let [details, fields] = await connection.query(query)
+    let [grand_total_view, f] = await connection.query(`SELECT * FROM grand_total_view WHERE order_id = ${order_id}`)
     details = details[0]
 
     let order_infor = {}
@@ -29,7 +30,9 @@ async function getSingleOrder({
             shipment_price,
             shipment_status,
             payment_method,
-            paid_date
+            paid_date,
+            sub_total: (grand_total_view.length > 0) ? grand_total_view[0].sub_total : "Not calculated!",
+            grand_total: (grand_total_view.length > 0) ? grand_total_view[0].grand_total : "Not calculated!"
         }
     }
 
