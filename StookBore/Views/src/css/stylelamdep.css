@@ -240,7 +240,7 @@
     align-items: flex-start;
     flex-direction: column;
     padding: 8px;
-    width: calc(100%/4);
+    width: calc(100%/3);
     margin-top: 10px;
 }
 
@@ -269,6 +269,10 @@
     height: auto;
 }
 
+.product-desc {
+  height: 50px;
+}
+
 .lamdepi-price-special {
     font-size: 1.15em;
     color: #C92127;
@@ -280,6 +284,29 @@
     color: #888888;
     text-decoration: line-through;
     font-size: 0.9em;
+}
+
+.list-btn-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-to-cart, .delete-product, .edit-product, .add-product {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--mainButton);
+    color: var(--bodyColor);
+    padding: 10px 12px;
+    margin: 35px 0 10px 0;
+    font-weight: bolder;
+    box-shadow: var(--mainShadow);
+    cursor: pointer;
+}
+
+.add-to-cart, .add-product {
+  background-color: #d02424;
 }
 
 /* <!-- ========== Modal - Cart Section ========= --!> */

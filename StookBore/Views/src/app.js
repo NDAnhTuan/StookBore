@@ -7,7 +7,7 @@ setInterval(() => {
 
 /*==================== ProductsData ===================*/
 //-> import productsData
-import { productsData } from './Products.js';
+import { productsDat } from './Products.js';
 
 /*======================== Modal ======================*/
 const cartBtn = document.querySelector('.cart-btn'),
@@ -50,12 +50,15 @@ const productsDOM = document.querySelector('.products-center'),
 
 let cart = [];
 let buttonsDOM = [];
+let productsData = productsDat;
 
 class UI {
   //======> Display products on DOM <======
   displayProducts(products) {
     let result = '';
-
+    console.log("display");
+    console.log(products);
+    
     products.forEach((item) => {
       result += `
       <div class="product lamdepi-container-item">
@@ -75,10 +78,17 @@ class UI {
             $${item.price}
           </p>
         </div>
-
-        <button class="btn add-to-cart" data-id=${item.id}>
-          Buy
-        </button>
+        <div class = "list-btn-item">
+          <button class="btn add-to-cart" data-id=${item.id}>
+            Buy
+          </button>
+          <button class="btn delete-product" data-id=${item.id}>
+            Delete
+          </button>
+          <button class="btn edit-product" data-id=${item.id}>
+            Edit
+          </button>
+        </div>
       </div>
       `;
     });
@@ -86,6 +96,33 @@ class UI {
     productsDOM.innerHTML = result;
   }
 
+  // =============================================
+  deleteProductsBtns() {
+    const deleteProBtns = [...document.querySelectorAll('.delete-product')];
+    console.log("Tôi đang chạy delete");
+    deleteProBtns.forEach((btn) => {
+      const id = btn.dataset.id;
+      console.log("Tôi đang chạy delete id = " + id);
+      btn.addEventListener('click', (e) => {
+        console.log("tôi ấn vô id = " + id);
+        const index = productsData.findIndex((item) => item.id === parseInt(id));
+        console.log("is " + index);
+        if (index !== -1) {
+          console.log("chạy thôi");
+          console.log(productsData);
+          productsData.splice(index, 1);
+          console.log(btn.parentNode.parentNode);
+          productsDOM.removeChild(btn.parentNode.parentNode);
+          // Storage.saveProducts(productsData);
+          // productsDOM.innerHTML = "";
+          // this.displayProducts(productsData);
+          // this.getCartBtns();
+        }
+        
+      });
+      
+    });
+  }
   //======> Get products & add to shopping cart <=====
   getCartBtns() {
     //-> btns are NodeList -> to convert NodeList to Array
@@ -357,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //-> get buttons
   ui.getCartBtns();
-
+  ui.deleteProductsBtns();
   //-> get card and set up app
   ui.setUpApp();
 
