@@ -5,6 +5,7 @@ use railway;
 DELIMITER //
 CREATE FUNCTION ValidateUserEmail(userID_input INT, email_input VARCHAR(125))
 RETURNS BOOLEAN
+DETERMINISTIC
 BEGIN
     DECLARE actual_email VARCHAR(125);
     IF userID_input IS NULL OR email_input IS NULL THEN
@@ -31,6 +32,7 @@ WHERE user_id = 1;
 DELIMITER //
 CREATE FUNCTION IsPromotionActive(promotion_name VARCHAR(125))
 RETURNS BOOLEAN
+DETERMINISTIC
 BEGIN
     DECLARE start_date DATE;
     DECLARE end_date DATE;
@@ -113,11 +115,11 @@ BEGIN
 		END IF;
         
 		-- add shipment price
-        SELECT shipment_price INTO shipmentPrice
-        FROM Orders
+		SELECT shipment_price INTO shipmentPrice
+		FROM Orders
         WHERE order_id = cur_order_id;
-        SET cur_total = cur_total + shipmentPrice * 1000;
-        SET total = total + cur_total;
+		SET cur_total = cur_total + shipmentPrice;
+		SET total = total + cur_total;
     END LOOP;
     CLOSE cur;
 
@@ -125,6 +127,49 @@ BEGIN
 END//
 DELIMITER ;
 
+DELIMITER //
+CREATE FUNCTION getLevelCustomer(clientID_in INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE levelCustomer INT;
+    SET levelCustomer = 6; -- Default value
+    
+    IF (TotalCustomerPurchase(clientID_in) > 0 AND TotalCustomerPurchase(clientID_in) < 499000) THEN
+        SET levelCustomer = 0;
+    ELSEIF (TotalCustomerPurchase(clientID_in) > 500000 AND TotalCustomerPurchase(clientID_in) < 999000) THEN
+        SET levelCustomer = 1;
+    ELSEIF (TotalCustomerPurchase(clientID_in) > 1000000 AND TotalCustomerPurchase(clientID_in) < 2999000) THEN
+        SET levelCustomer = 2;
+    ELSEIF (TotalCustomerPurchase(clientID_in) > 3000000 AND TotalCustomerPurchase(clientID_in) < 4999000) THEN
+        SET levelCustomer = 3;
+    ELSEIF (TotalCustomerPurchase(clientID_in) > 5000000 AND TotalCustomerPurchase(clientID_in) < 9999000) THEN
+        SET levelCustomer = 4;
+    ELSEIF (TotalCustomerPurchase(clientID_in) > 10000000 AND TotalCustomerPurchase(clientID_in) < 19999000) THEN
+        SET levelCustomer = 5;
+    END IF;
+    
+    RETURN levelCustomer;
+END //
+DELIMITER ;
+
 -- test
-SELECT TotalCustomerPurchase(1); 
+SELECT TotalCustomerPurchase(1);
+SELECT getLevelCustomer(1);
 SELECT * from Books;
+select * from Author_Dept;
+select * from Apply;
+select * from Category;
+select * from Clients;
+select * from Contain;
+select * from Discount;
+select * from Exchange;
+select * from Employees;
+select * from Gift;
+select * from Manage;
+select * from Orders;
+select * from Promotion;
+select * from Stock_Contains;
+select * from Stock_Order;
+select * from Users;
+select * from Users_Address;
