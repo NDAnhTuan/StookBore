@@ -2,9 +2,7 @@
 let alertShow = false;
 
 setInterval(() => {
-  document.title = alertShow ? 'Follow me 😍' : 'on GitHub ✌';
-
-  alertShow = !alertShow;
+  document.title = 'StookBore 😍';
 }, 1000);
 
 /*==================== ProductsData ===================*/
@@ -60,7 +58,7 @@ class UI {
 
     products.forEach((item) => {
       result += `
-      <div class="product">
+      <div class="product lamdepi-container-item">
         <div class="img-container">
             <img
               class="product-img"
@@ -165,12 +163,12 @@ class UI {
     </div>
 
     <div class="cart-item-controller">
-      <i class="ri-arrow-up-s-line arrow-up" data-id=${cartItem.id} ></i>
+      <i class="ti-angle-up arrow-up" data-id=${cartItem.id} ></i>
       <p>${cartItem.quantity}</p>
-      <i class="ri-arrow-down-s-line arrow-down" data-id=${cartItem.id} ></i>
+      <i class="ti-angle-down arrow-down" data-id=${cartItem.id} ></i>
     </div>
 
-    <i class="ri-delete-bin-line trash" data-id=${cartItem.id} ></i>
+    <i class="ti-trash trash" data-id=${cartItem.id} ></i>
     `;
 
     cartContent.append(div);
@@ -327,17 +325,19 @@ class UI {
 class Storage {
   // save loaded products and set "products" on localStorage
   static saveProducts(products) {
+    console.log("Tôi có chạy saveProducts mà");
     localStorage.setItem('products', JSON.stringify(products));
   }
 
   static getProducts(id) {
     const _products = JSON.parse(localStorage.getItem('products'));
-
+    console.log(_products);
     // parseInt(): convert string to integer
     return _products.find((p) => p.id === parseInt(id));
   }
 
   static saveCart(cart) {
+    console.log("Tôi có chạy save cart mà");
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
