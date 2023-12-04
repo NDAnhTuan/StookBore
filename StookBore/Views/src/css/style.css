@@ -88,10 +88,10 @@ img {
 }
 
 .top-bar-logo {
-    background: url("https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/logo/fahasa_logo.png") no-repeat center center;
+    background: url("../../mockup/logo.png") no-repeat center center;
     background-size: contain;
-    width: 220px;
-    height: 36px;
+    width: 240px;
+    height: 70px;
     margin-right: 60px;
 }
 
@@ -586,7 +586,7 @@ img {
 }
 
 .top-notif:hover>.top-dropdown {
-    display: block;
+    display: none;
     z-index: 100;
 }
 
@@ -595,7 +595,7 @@ img {
 }
 
 .top-account:hover>.top-dropdown {
-    display: block;
+    display: none;
 }
 
 .top-dropdown {
