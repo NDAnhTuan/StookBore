@@ -1,6 +1,6 @@
 /*============ Build our products data ==============*/
 
-export const productsData = [
+export const productsDat = [
   {
     id: 1,
     title: "Country Living Divan Bed & Headboard",
