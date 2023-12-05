@@ -1,3 +1,4 @@
+//======================================NOT UES (FETCH ALL BOOKS)==========================
 document.addEventListener("DOMContentLoaded", function () {
     // API endpoint
     const apiUrl = "https://db-stookbore-ass2.onrender.com/v1/user/books?sortByPrice=1&per_page=5&current_page=1";
@@ -43,7 +44,7 @@ function generateTable(data) {
         const actionCell = row.insertCell();
         
         const buttonContainer = document.createElement("div");
-        buttonContainer.classList.add("button-container"); 
+        buttonContainer.classList.add("button-container");
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
@@ -76,38 +77,76 @@ var button = document.getElementById("Manage-btn");
 button.addEventListener("click", function() {
     window.location.href = "manageBook.html";
 });
+//======================================NOT UES==========================
+
+
 
 
 //=====================BEGIN ADD BOOK=========================
+function hideBackdrop() {
+    document.getElementById("backdrop").style.display = "none";
+}
 function showBackdrop() {
         document.getElementById("backdrop").style.display = "flex";
+}
+
+
+function addBook() {
+        // Validate the form fields
+    var title = document.getElementById('title').value;
+    var descriptions = document.getElementById('descriptions').value;
+    var publisher = document.getElementById('publisher').value;
+    var author = document.getElementById('author').value;
+    var stock = document.getElementById('stock').value;
+    var current_price = document.getElementById('current_price').value;
+    var edition_version = document.getElementById('edition_version').value;
+    var category_id = document.getElementById('category_id').value;
+    if (title === '') {
+        alert('Please fill out title');
+        return;
+    }
+    else if (descriptions === '') {
+        alert('Please fill out descriptions');
+        return;
+    } else if (publisher === '') {
+        alert('Please fill out publisher');
+        return;
+    } else if (author === '') {
+        alert('Please fill out author');
+        return;
+    } else if (stock === '') {
+        alert('Please fill out stock');
+        return;
+    } else if (current_price === '') {
+        alert('Please fill out current price');
+        return;
+    } else if (edition_version === '') {
+        alert('Please fill out edition version');
+        return;
+    } else if (category_id === '') {
+        alert('Please fill out category id');
+        return;
     }
 
-    function hideBackdrop() {
-        document.getElementById("backdrop").style.display = "none";
-    }
+    const form = document.getElementById("addBookForm");
+    const formData = new FormData(form);
 
-    function addBook() {
-        const form = document.getElementById("addBookForm");
-        const formData = new FormData(form);
-
-        fetch('https://db-stookbore-ass2.onrender.com/v1/user/book', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(Object.fromEntries(formData)),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response as needed
-            console.log('Book added successfully:', data);
-            hideBackdrop();
-        })
-        .catch(error => {
-            console.error('Error adding book:', error);
-            hideBackdrop();
-        });
+    fetch('https://db-stookbore-ass2.onrender.com/v1/user/book', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Book Add successfully');
+        hideBackdrop();
+    })
+    .catch(error => {
+        console.error('Error adding book:', error);
+        hideBackdrop();
+    });
 }
     
 //==========================END ADD BOOK===========================
