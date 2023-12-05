@@ -373,8 +373,11 @@ class Storage {
     return _products.find((p) => p.id === parseInt(id));
   }
 
-  static getProducts() {
-    return JSON.parse(localStorage.getItem('products'));
+  static getProductss() {
+    const _products = JSON.parse(localStorage.getItem('products'));
+    console.log(_products);
+    // return JSON.parse(localStorage.getItem('products'));
+    return _products;
   }
 
   static saveCart(cart) {
@@ -390,8 +393,9 @@ class Storage {
 /*================ Show products on DOM ===============*/
 document.addEventListener('DOMContentLoaded', () => {
   const products = new Products();
-  const productsData = Storage.getProducts() || products.getProducts();
-
+  const productsData = Storage.getProductss() || products.getProducts();
+  // console.log(products.getProducts());
+  // console.log("get Products: "+Storage.getProductss());
   const ui = new UI();
   //-> display products on DOM
   ui.displayProducts(productsData);
