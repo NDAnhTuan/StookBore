@@ -40,7 +40,6 @@ function generateTable(data) {
             cell.textContent = item[key];
         }
 
-        // Add "Edit" and "Delete" buttons to the same cell
         const actionCell = row.insertCell();
         
         const buttonContainer = document.createElement("div");
@@ -48,7 +47,7 @@ function generateTable(data) {
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
-        editButton.classList.add("Manage-btn-edit"); // Add the class "manage-btn"
+        editButton.classList.add("Manage-btn-edit");
         editButton.addEventListener("click", function() {
             const itemId = row.cells[0].textContent; // Assuming the ID is in the first column
             // Add your edit logic here using the itemId
@@ -58,7 +57,7 @@ function generateTable(data) {
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
-        deleteButton.classList.add("Manage-btn-delete"); // Add the class "manage-btn"
+        deleteButton.classList.add("Manage-btn-delete");
         deleteButton.addEventListener("click", function() {
             const itemId = row.cells[0].textContent; // Assuming the ID is in the first column
             // Add your delete logic here using the itemId
