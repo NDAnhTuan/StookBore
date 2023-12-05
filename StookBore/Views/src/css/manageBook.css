@@ -1,0 +1,157 @@
+.Manage-btn {
+    background-color: green;
+    border: 2px solid green;
+    padding: 5px 10px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.Manage-btn:hover {
+    background-color: rgb(17, 255, 0);
+    color: white;
+}
+
+
+.Manage-btn-cancel {
+    background-color: white;
+    border: 2px solid rgb(249, 108, 0);
+    padding: 5px 10px;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.Manage-btn-cancel:hover {
+    background-color: rgb(249, 108, 0);
+    color: white;
+}
+
+.Manage-btn-edit {
+    background-color: white;
+    border: 2px solid rgb(188, 185, 11);
+    padding: 5px 10px;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.Manage-btn-edit:hover {
+    background-color: rgb(188, 185, 11);
+    color: white;
+}
+
+.Manage-btn-delete {
+    background-color: white;
+    border: 2px solid rgb(255, 39, 1);
+    padding: 5px 10px;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.Manage-btn-delete:hover {
+    background-color: rgb(255, 39, 1);
+    color: white;
+}
+
+.Manage-btn-edit,
+.Manage-btn-delete {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.button-container {
+    display: flex;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#table-container {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+
+#backdrop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Style for modal */
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for form elements */
+#addBookForm {
+    display: inline;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+button.Manage-btn-cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+button[type="button"] {
+    margin: 0 5px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 600px) {
+    .modal {
+        width: 600px;
+    }
+}
