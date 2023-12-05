@@ -113,7 +113,7 @@ class UI {
           productsData.splice(index, 1);
           console.log(btn.parentNode.parentNode);
           productsDOM.removeChild(btn.parentNode.parentNode);
-          // Storage.saveProducts(productsData);
+          Storage.saveProducts(productsData);
           // productsDOM.innerHTML = "";
           // this.displayProducts(productsData);
           // this.getCartBtns();
@@ -373,6 +373,10 @@ class Storage {
     return _products.find((p) => p.id === parseInt(id));
   }
 
+  static getProducts() {
+    return JSON.parse(localStorage.getItem('products'));
+  }
+
   static saveCart(cart) {
     console.log("Tôi có chạy save cart mà");
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -386,7 +390,7 @@ class Storage {
 /*================ Show products on DOM ===============*/
 document.addEventListener('DOMContentLoaded', () => {
   const products = new Products();
-  const productsData = products.getProducts();
+  const productsData = Storage.getProducts() || products.getProducts();
 
   const ui = new UI();
   //-> display products on DOM
