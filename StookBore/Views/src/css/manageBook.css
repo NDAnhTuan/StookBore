@@ -1,4 +1,6 @@
-.Manage-btn {
+.Manage-btn,
+.confirm-delete,
+.update-book {
     background-color: green;
     border: 2px solid green;
     padding: 5px 10px;
@@ -8,23 +10,29 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.Manage-btn:hover {
-    background-color: rgb(17, 255, 0);
+.Manage-btn:hover,
+.cancel-update:hover,
+.cancel-delete:hover {
+    background-color: rgb(255, 136, 0);
     color: white;
 }
 
 
-.Manage-btn-cancel {
-    background-color: white;
-    border: 2px solid rgb(249, 108, 0);
+.Manage-btn-cancel,
+.cancel-delete,
+.cancel-update {
+    background-color: rgb(245, 0, 0);
+    border: 2px solid rgb(163, 163, 5);
     padding: 5px 10px;
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.Manage-btn-cancel:hover {
+.Manage-btn-cancel:hover,
+.confirm-delete:hover,
+.update-book:hover {
     background-color: rgb(249, 108, 0);
     color: white;
 }
@@ -93,7 +101,9 @@ th {
 }
 
 
-#backdrop {
+#backdrop,
+#confirmation-modal,
+#edit-backdrop {
     display: none;
     align-items: center;
     justify-content: center;
@@ -114,7 +124,8 @@ th {
 }
 
 /* Style for form elements */
-#addBookForm {
+#addBookForm,
+#edit-form {
     display: inline;
     gap: 10px;
 }

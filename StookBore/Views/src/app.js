@@ -5,6 +5,7 @@ setInterval(() => {
   document.title = 'StookBore 😍';
 }, 1000);
 
+
 /*==================== ProductsData ===================*/
 //-> import productsData
 // import { productsDat } from './Products.js';
@@ -154,10 +155,10 @@ class UI {
           <button class="btn add-to-cart" data-id=${item.book_id}>
             Buy
           </button>
-          <button class="btn delete-product" data-id=${item.book_id}>
+          <button class="btn delete-product" onClick="showDeleteConfirmation(${item.book_id})" data-id=${item.book_id}>
             Delete
           </button>
-          <button class="btn edit-product" data-id=${item.book_id}>
+          <button class="btn edit-product" onClick="showEditForm(${item.book_id})" data-id=${item.book_id}>
             Edit
           </button>
         </div>
@@ -168,31 +169,32 @@ class UI {
     productsDOM.innerHTML = result;
   }
 
-  // =============================================
-  deleteProductsBtns() {
-    const deleteProBtns = [...document.querySelectorAll('.delete-product')];
-    deleteProBtns.forEach((btn) => {
-      const book_id = btn.dataset.id;
-      btn.addEventListener('click', (e) => {
-        // console.log("tôi ấn vô id = " + id);
-        const index = productsData.findIndex((item) => item.book_id === parseInt(book_id));
-        console.log("is " + index);
-        if (index !== -1) {
-          console.log("chạy thôi");
-          console.log(productsData);
-          productsData.splice(index, 1);
-          console.log(btn.parentNode.parentNode);
-          productsDOM.removeChild(btn.parentNode.parentNode);
-          Storage.saveProducts(productsData);
-          // productsDOM.innerHTML = "";
-          // this.displayProducts(productsData);
-          // this.getCartBtns();
-        }
+    // =============================================
+
+//   deleteProductsBtns() {
+//     const deleteProBtns = [...document.querySelectorAll('.delete-product')];
+//     deleteProBtns.forEach((btn) => {
+//       const book_id = btn.dataset.id;
+//       btn.addEventListener('click', (e) => {
+//         // console.log("tôi ấn vô id = " + id);
+//         const index = productsData.findIndex((item) => item.book_id === parseInt(book_id));
+//         console.log("is " + index);
+//         if (index !== -1) {
+//           console.log("chạy thôi");
+//           console.log(productsData);
+//           productsData.splice(index, 1);
+//           console.log(btn.parentNode.parentNode);
+//           productsDOM.removeChild(btn.parentNode.parentNode);
+//           Storage.saveProducts(productsData);
+//           // productsDOM.innerHTML = "";
+//           // this.displayProducts(productsData);
+//           // this.getCartBtns();
+//         }
         
-      });
+//       });
       
-    });
-  }
+//     });
+//   }
   //======> Get products & add to shopping cart <=====
   getCartBtns() {
     //-> btns are NodeList -> to convert NodeList to Array
@@ -491,7 +493,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   //-> get buttons
   ui.getCartBtns();
-  ui.deleteProductsBtns();
+//   ui.deleteProductsBtns();
+    
   //-> get card and set up app
   ui.setUpApp();
 
