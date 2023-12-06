@@ -73,7 +73,7 @@ function generateTable(data) {
     tableContainer.appendChild(table);
 }
 
-var button = document.getElementById("Manage-btn");
+var button = document.getElementById("myButton");
 button.addEventListener("click", function() {
     window.location.href = "manageBook.html";
 });
@@ -83,6 +83,9 @@ button.addEventListener("click", function() {
 
 
 //=====================BEGIN ADD BOOK=========================
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("backdrop").style.display = "none";
+        });
 function hideBackdrop() {
     document.getElementById("backdrop").style.display = "none";
 }

@@ -1,6 +1,6 @@
 use railway;
 
--- =====================================================================================
+=====================================================================================
 -- function checks if the email of a given user ID matches a provided email
 DELIMITER //
 CREATE FUNCTION ValidateUserEmail(userID_input INT, email_input VARCHAR(125))
