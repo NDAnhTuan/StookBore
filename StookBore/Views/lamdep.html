@@ -321,28 +321,17 @@
                     <span>Sắp xếp theo: </span>
                     <!-- dropdown -->
                     <div class="selectbox-dropdown">
-                        <a class="selectbox-dropdown-macdinh">Bán chạy tuần</a>
+                        <a class="selectbox-dropdown-macdinh">Increase</a>
+                        <div class="icon-arrow-down">
+
+                        </div>
                         <div class="selectbox-dropdown-content">
-                            <a>Bán chạy tháng</a>
-                            <a>Bán chạy năm</a>
-                            <a>Nổi bật tuần</a>
-                            <a>Nổi bật tháng</a>
-                            <a>Nổi bật năm</a>
+                            <a class="selectbox-dropdown-second" onclick="reverseItem()">Decrease</a>
                         </div>
                     </div>
-                    <!-- dropdown -->
-                    <div class="selectbox-dropdown">
-                        <a class="selectbox-dropdown-macdinh">24 sản phẩm</a>
-                        <div class="selectbox-dropdown-content">
-                            <a>30 sản phẩm</a>
-                            <a>36 sản phẩm</a>
-                            <a>42 sản phẩm</a>
-                            <a>48 sản phẩm</a>
-                        </div>
-                    </div>
-                    <Button class="Manage-btn" onclick="showBackdrop()">Add</Button>
+                    <Button class="btn add-product" onclick="showBackdrop()">Add</Button>
+                    <!-- <div><button id="myButton">Click me</button></div> -->
                 </div>
-                <!-- <div><button id="myButton">Click me</button></div> -->
 
                 <!-- <div class="lamdepi-container">
           <div class="lamdepi-container-item">
@@ -803,6 +792,30 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="src/code.js"></script>
+    <script>
+        function reverseItem() {
+            var parentaTag = document.querySelector('.selectbox-dropdown-content');;
+            var parentaBox = document.querySelector('.selectbox-dropdown');
+            var aTag = document.querySelector("a[onclick='reverseItem()']");
+            var macdinh = document.querySelector('.selectbox-dropdown-macdinh');
+
+            parentaTag.removeChild(aTag);
+            parentaBox.removeChild(macdinh);
+
+            aTag.classList.remove("selectbox-dropdown-second");
+            aTag.classList.add("selectbox-dropdown-macdinh");
+            macdinh.classList.remove("selectbox-dropdown-macdinh");
+            macdinh.classList.add("selectbox-dropdown-second");
+
+            macdinh.setAttribute("onclick", "reverseItem()");
+            aTag.removeAttribute("onclick");
+
+            parentaTag.insertBefore(macdinh, parentaTag.firstChild);
+            parentaBox.insertBefore(aTag, parentaBox.firstChild);
+
+
+        }
+    </script>
 
 </footer>
 

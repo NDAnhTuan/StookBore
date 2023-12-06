@@ -7,7 +7,81 @@ setInterval(() => {
 
 /*==================== ProductsData ===================*/
 //-> import productsData
-import { productsDat } from './Products.js';
+// import { productsDat } from './Products.js';
+let productsDat;
+
+// document.addEventListener("DOMContentLoaded", async function () {
+//   const apiUrl = "https://db-stookbore-ass2.onrender.com/v1/user/books?sortByPrice=1&per_page=5&current_page=1";
+
+//   try {
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     console.log("data real: "+data.data);
+//     productsDat = data.data;
+//     console.log("data của anh Phú:" + productsDat);
+
+//     // Call functions or perform operations that depend on productsDat here
+//     processData();
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//   }
+// });
+
+// function processData() {
+//   // Use productsDat here or perform other operations
+//   const _temp = productsDat;
+//   console.log("!!!" + _temp);
+// }
+
+const apiUrl = "https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=1";
+async function processData() {
+  // Use productsDat here or perform other operations
+  console.log("after: ",productsDat);
+}
+
+console.log("before: ",productsDat);
+
+// async function fetchData() {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     productsDat = data.data;
+//     // Call functions or perform operations that depend on productsDat here
+
+//     // Call another function or perform operations with productsDat here
+//     await processData();
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//   }
+// }
+
+// // Call the fetchData function
+// await fetchData();
+console.log("end: ",productsDat);
+
+let cart = [];
+let buttonsDOM = [];
+let productsData = productsDat;
+
+// document.addEventListener("DOMContentLoaded", async function () {
+//   // API endpoint
+//   const apiUrl = "https://db-stookbore-ass2.onrender.com/v1/user/books?sortByPrice=1&per_page=5&current_page=1";
+//   // Fetch data from the API
+//   fetch(apiUrl)
+//       .then(response => response.json())
+//       .then(data => {
+//           // Call function to generate 
+//           console.log("data của anh Phú:", data.data);
+//           setproductsDat(data.data);
+//       })
+//       .catch(error => console.error('Error fetching data:', error));
+// });
+
+// function setproductsDat(data) {
+//   productsDat = data;
+// }
+
+// console.log("after", productsDat);
 
 /*======================== Modal ======================*/
 const cartBtn = document.querySelector('.cart-btn'),
@@ -48,9 +122,7 @@ const productsDOM = document.querySelector('.products-center'),
   clearCart = document.querySelector('.clear-cart'),
   searchInput = document.querySelector('.search');
 
-let cart = [];
-let buttonsDOM = [];
-let productsData = productsDat;
+
 
 class UI {
   //======> Display products on DOM <======
@@ -65,7 +137,7 @@ class UI {
         <div class="img-container">
             <img
               class="product-img"
-              src="${item.imageUrl}"
+              src="mockup/image-20221012114323663.jpg"
               alt="${item.title}"
             />
         </div>
@@ -75,17 +147,17 @@ class UI {
             ${item.title}
           </p>
           <p class="product-price">
-            $${item.price}
+            $ ${item.current_price}
           </p>
         </div>
         <div class = "list-btn-item">
-          <button class="btn add-to-cart" data-id=${item.id}>
+          <button class="btn add-to-cart" data-id=${item.book_id}>
             Buy
           </button>
-          <button class="btn delete-product" data-id=${item.id}>
+          <button class="btn delete-product" data-id=${item.book_id}>
             Delete
           </button>
-          <button class="btn edit-product" data-id=${item.id}>
+          <button class="btn edit-product" data-id=${item.book_id}>
             Edit
           </button>
         </div>
@@ -99,13 +171,11 @@ class UI {
   // =============================================
   deleteProductsBtns() {
     const deleteProBtns = [...document.querySelectorAll('.delete-product')];
-    console.log("Tôi đang chạy delete");
     deleteProBtns.forEach((btn) => {
-      const id = btn.dataset.id;
-      console.log("Tôi đang chạy delete id = " + id);
+      const book_id = btn.dataset.id;
       btn.addEventListener('click', (e) => {
-        console.log("tôi ấn vô id = " + id);
-        const index = productsData.findIndex((item) => item.id === parseInt(id));
+        // console.log("tôi ấn vô id = " + id);
+        const index = productsData.findIndex((item) => item.book_id === parseInt(book_id));
         console.log("is " + index);
         if (index !== -1) {
           console.log("chạy thôi");
@@ -133,11 +203,11 @@ class UI {
 
     //-> display products on cart
     addCartBtns.forEach((btn) => {
-      // console.log(btn.dataset.id);
-      const id = btn.dataset.id;
+      // console.log(btn.dataset.id);getProducts(id)
+      const book_id = btn.dataset.id;
 
       //-> check if product is in the cart
-      const isExist = cart.find((p) => p.id === id);
+      const isExist = cart.find((p) => p.book_id === book_id);
 
       if (isExist) {
         btn.textContent = 'Added';
@@ -151,7 +221,7 @@ class UI {
 
         //-> get products that has been added before, from localStorage
         //-> quantity: 1 -> to find out whether it has been added or not
-        const addedProduct = { ...Storage.getProducts(id), quantity: 1 };
+        const addedProduct = { ...Storage.getProducts(book_id), quantity: 1 };
 
         //-> update shopping cart
         cart = [...cart, addedProduct];
@@ -176,7 +246,7 @@ class UI {
       //-> show number of items in cart
       tempCartItems += curr.quantity;
 
-      return acc + curr.quantity * curr.price;
+      return acc + curr.quantity * curr.current_price;
     }, 0);
 
     cartTotal.textContent = `Total price: $ ${totalPrice.toFixed(2)}`;
@@ -191,21 +261,21 @@ class UI {
     div.innerHTML = `
     <img
       class="cart-item-img"
-      src="${cartItem.imageUrl}"
+      src="mockup/image-20221012114323663.jpg"
     />
 
     <div class="cart-item-desc">
       <h4>${cartItem.title}</h4>
-      <h5>$ ${cartItem.price}</h5>
+      <h5>$ ${cartItem.current_price}</h5>
     </div>
 
     <div class="cart-item-controller">
-      <i class="ti-angle-up arrow-up" data-id=${cartItem.id} ></i>
+      <i class="ti-angle-up arrow-up" data-id=${cartItem.book_id} ></i>
       <p>${cartItem.quantity}</p>
-      <i class="ti-angle-down arrow-down" data-id=${cartItem.id} ></i>
+      <i class="ti-angle-down arrow-down" data-id=${cartItem.book_id} ></i>
     </div>
 
-    <i class="ti-trash trash" data-id=${cartItem.id} ></i>
+    <i class="ti-trash trash" data-id=${cartItem.book_id} ></i>
     `;
 
     cartContent.append(div);
@@ -218,7 +288,7 @@ class UI {
 
     //-> addCartItem to Modal
     cart.forEach((cartItem) => {
-      const addedCart = document.querySelector(`[data-id="${cartItem.id}"]`);
+      const addedCart = document.querySelector(`[data-id="${cartItem.book_id}"]`);
 
       if (addedCart) {
         addedCart.textContent = 'Added';
@@ -256,7 +326,7 @@ class UI {
     //-> increase products <-
     const increaseQuantity = (target) => {
       //get item from cart
-      const addedItem = cart.find((c) => c.id === parseInt(target.dataset.id));
+      const addedItem = cart.find((c) => c.book_id === parseInt(target.dataset.id));
       addedItem.quantity++;
 
       //update total shopping cart value
@@ -271,11 +341,11 @@ class UI {
     //-> remove products <-
     const removeItemFromCart = (target) => {
       const removedItem = cart.find(
-        (c) => c.id === parseInt(target.dataset.id)
+        (c) => c.book_id === parseInt(target.dataset.id)
       );
 
       //remove from cart item
-      this.removeItem(removedItem.id);
+      this.removeItem(removedItem.book_id);
 
       Storage.saveCart(cart);
 
@@ -287,12 +357,12 @@ class UI {
     //-> decrease products <-
     const decreaseQuantity = (target) => {
       const subtractedItem = cart.find(
-        (c) => c.id === parseInt(target.dataset.id)
+        (c) => c.book_id === parseInt(target.dataset.id)
       );
 
       //remove when one product remained
       if (subtractedItem.quantity === 1) {
-        this.removeItem(subtractedItem.id);
+        this.removeItem(subtractedItem.book_id);
 
         //first parentElement = cart-item-controller
         //second parentElement = cart-item
@@ -313,7 +383,7 @@ class UI {
 
   clearCart() {
     //-> get all carts and pass id to removeItem()
-    cart.forEach((cItem) => this.removeItem(cItem.id));
+    cart.forEach((cItem) => this.removeItem(cItem.book_id));
 
     //-> remove cart-content children from Modal
     while (cartContent.children.length > 0) {
@@ -323,10 +393,10 @@ class UI {
     closeModal();
   }
 
-  removeItem(id) {
+  removeItem(book_id) {
     // console.log(id);
     //-> update cart
-    cart = cart.filter((c) => c.id !== id);
+    cart = cart.filter((c) => c.book_id !== book_id);
 
     //-> update total price & cart items
     this.setCartValue(cart);
@@ -336,7 +406,7 @@ class UI {
 
     //-> get carts  and update text and disabled
     const button = buttonsDOM.find(
-      (btn) => parseInt(btn.dataset.id) === parseInt(id)
+      (btn) => parseInt(btn.dataset.id) === parseInt(book_id)
     );
 
     button.textContent = 'Buy';
@@ -366,15 +436,19 @@ class Storage {
     localStorage.setItem('products', JSON.stringify(products));
   }
 
-  static getProducts(id) {
+  static getProducts(book_id) {
     const _products = JSON.parse(localStorage.getItem('products'));
-    console.log(_products);
+    console.log("get product i: ", _products);
+    console.log("get i",_products.find((p) => p.book_id === parseInt(book_id)));
     // parseInt(): convert string to integer
-    return _products.find((p) => p.id === parseInt(id));
+    return _products.find((p) => p.book_id === parseInt(book_id));
   }
 
-  static getProducts() {
-    return JSON.parse(localStorage.getItem('products'));
+  static getProductss() {
+    const _products = JSON.parse(localStorage.getItem('products'));
+    console.log(_products);
+    // return JSON.parse(localStorage.getItem('products'));
+    return _products;
   }
 
   static saveCart(cart) {
@@ -387,14 +461,33 @@ class Storage {
   }
 }
 
-/*================ Show products on DOM ===============*/
-document.addEventListener('DOMContentLoaded', () => {
-  const products = new Products();
-  const productsData = Storage.getProducts() || products.getProducts();
 
+console.log(productsData);
+/*================ Show products on DOM ===============*/
+document.addEventListener('DOMContentLoaded', async function() {
+
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    productsDat = data.data;
+    console.log("data của anh Phú:" + productsDat);
+
+    // Call functions or perform operations that depend on productsDat here
+    processData();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
+  
+  console.log("chay cai nay");
+  const products = new Products();
+  const productsDT = productsDat;
+  // console.log(products.getProducts());
+  // console.log("get Products: "+Storage.getProductss());
   const ui = new UI();
   //-> display products on DOM
-  ui.displayProducts(productsData);
+  ui.displayProducts(productsDT);
 
   //-> get buttons
   ui.getCartBtns();
@@ -405,7 +498,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ui.cartLogic();
 
   ui.searchItem();
-
+  
   //-> Display saved products on page loading
-  Storage.saveProducts(productsData);
+  Storage.saveProducts(productsDT);
+
 });
+
