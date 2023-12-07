@@ -86,11 +86,13 @@
 
 //=====================BEGIN ADD BOOK=========================
 function hideBackdrop() {
-    document.getElementById("backdrop").style.display = "none";
+        document.getElementById("backdrop").style.display = "none";
 }
 function showBackdrop() {
         document.getElementById("backdrop").style.display = "flex";
 }
+
+
 
 
 function addBook() {

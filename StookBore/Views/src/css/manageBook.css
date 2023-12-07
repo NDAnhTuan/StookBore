@@ -93,7 +93,7 @@ th {
 }
 
 
-#backdrop {
+#backdrop, #manage-user, #content-Order, #content-Order-detail {
     display: none;
     align-items: center;
     justify-content: center;
@@ -105,6 +105,35 @@ th {
     background: rgba(0, 0, 0, 0.5);
 }
 
+.Manage-user-btn {
+    padding: 5px 10px;
+    border: 2px solid forestgreen;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: forestgreen;
+    color: white;
+}
+
+#content-Order, #content-Order-detail {
+    display: none;
+    flex-direction: column;
+    /* width: 60%; */
+}
+
+.order-item-list, .order-item-list-detail {
+    overflow: auto;
+    max-height: 320px;
+    width: 60%;
+    background-color: #ececec;
+}
+
+.order-item {
+    border: 1px solid #333;
+    background-color: #ececec;
+}
+
+
+
 /* Style for modal */
 .modal {
     background-color: #fff;
@@ -114,7 +143,7 @@ th {
 }
 
 /* Style for form elements */
-#addBookForm {
+#addBookForm, #manage-user-Form {
     display: inline;
     gap: 10px;
 }

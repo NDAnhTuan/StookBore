@@ -5,11 +5,53 @@ setInterval(() => {
   document.title = 'StookBore 😍';
 }, 1000);
 
+/*=================== Modal GetUser ==================*/
+
+// async function GetUserId(){
+//   var userID = document.querySelector('.input-UserId').value;
+//   const apiUrlOrder = `https://db-stookbore-ass2.onrender.com/v1/user/orders?user_id=${userID}`;
+//   try {
+//     const response = await fetch(apiIncrease);
+//     const data =await response.json();
+//     productsDat = data.data;
+//     // Call functions or perform operations that depend on productsDat here
+
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//   }
+// };
+
+
+
 /*==================== ProductsData ===================*/
 //-> import productsData
 // import { productsDat } from './Products.js';
 let productsDat;
+let categoryDat;
+// function reverseItem() {
+//   var parentaTag = document.querySelector('.selectbox-dropdown-content');;
+//   var parentaBox = document.querySelector('.selectbox-dropdown');
+//   var aTag = document.querySelector("a[onclick='reverseItem()']");
+//   console.log("reverseItem", aTag);
+//   var macdinh = document.querySelector('.selectbox-dropdown-macdinh');
 
+//   parentaTag.removeChild(aTag);
+//   parentaBox.removeChild(macdinh);
+
+//   aTag.classList.remove("selectbox-dropdown-second");
+//   aTag.classList.add("selectbox-dropdown-macdinh");
+//   macdinh.classList.remove("selectbox-dropdown-macdinh");
+//   macdinh.classList.add("selectbox-dropdown-second");
+
+//   macdinh.setAttribute("onclick", "reverseItem()");
+//   aTag.removeAttribute("onclick");
+  
+//   parentaTag.insertBefore(macdinh, parentaTag.firstChild);
+//   parentaBox.insertBefore(aTag, parentaBox.firstChild);
+//   // =============================== 
+//   console.log(aTag.innerText);
+
+// }
 // document.addEventListener("DOMContentLoaded", async function () {
 //   const apiUrl = "https://db-stookbore-ass2.onrender.com/v1/user/books?sortByPrice=1&per_page=5&current_page=1";
 
@@ -33,7 +75,8 @@ let productsDat;
 //   console.log("!!!" + _temp);
 // }
 
-const apiUrl = "https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=1";
+const apiUrl = `https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=1`;
+const apiUrlCategory = `https://db-stookbore-ass2.onrender.com/v1/user/categories`;
 async function processData() {
   // Use productsDat here or perform other operations
   console.log("after: ",productsDat);
@@ -61,7 +104,8 @@ console.log("end: ",productsDat);
 
 let cart = [];
 let buttonsDOM = [];
-let productsData = productsDat;
+let buttonsDOMDOM = [];
+let productsData = [];
 
 // document.addEventListener("DOMContentLoaded", async function () {
 //   // API endpoint
@@ -115,17 +159,142 @@ class Products {
 }
 
 /*================== Display Products =================*/
-const productsDOM = document.querySelector('.products-center'),
+const OrdersDOM = document.getElementById('content-Order'), OrdersDetailDOM = document.getElementById('content-Order-detail');
+const categoryDOM = document.querySelector('.nhomsanpham'),
+  productsDOM = document.querySelector('.products-center'),
   cartTotal = document.querySelector('.cart-total'),
   cartItemsCounter = document.querySelector('.cart-items'),
   cartContent = document.querySelector('.cart-content'),
   clearCart = document.querySelector('.clear-cart'),
-  searchInput = document.querySelector('.search');
-
+  searchInput = document.querySelector('.search'),
+  userInput = document.querySelector('btn-enter-user');
+console.log("OrdersDOM", OrdersDOM); 
 
 
 class UI {
   //======> Display products on DOM <======
+  displayOrdersDetail(orderDetail) {
+    let result = '<div class="order-item-list-detail" style="display:flex">';
+    
+    orderDetail.forEach((item) => {
+
+      result += `
+      <div class="product" style="border-right: 1px solid #333;">
+        <h4 class="cart-title">Order Infor</h4>
+        <div class="product-desc" style="overflow: auto; max-height: 400px; min-height: 300px;">
+
+          <p class="product-title">
+            Order id: ${item.order_infor.order_id}
+          </p>
+          <p>
+          Order status: ${item.order_infor.order_status}
+          </p>
+          <p>
+          Shipment Method: ${item.order_infor.shipment_method}
+          </p>
+          <p>
+          Shipment Date: ${item.order_infor.shipment_date}
+          </p>
+          <p>
+          Shipment Price: ${item.order_infor.shipment_price}
+          </p>
+          <p>
+          Shipment Status: ${item.order_infor.shipment_status}
+          </p>
+          <p>
+          Payment Method: ${item.order_infor.payment_method}
+          </p>
+          <p>
+          Paid Date: ${item.order_infor.paid_date}
+          </p>
+          <p>
+          Sub Total: ${item.order_infor.sub_total}
+          </p>
+          <p>
+          Grand Total: ${item.order_infor.grand_total}
+          </p>
+        </div>
+      </div>
+      `;
+      result += `
+      <div class="" style = "overflow:auto;  max-height: 400px; min-height: 300px;">
+        <h4 class="cart-title">Order Detail</h4>`;
+      item.order_detail.forEach((itemDetail) => {
+        console.log("itemDetail", itemDetail);
+        result += `
+      
+        <div class="" style="border: 1px solid #333;">
+          <p class="product-title">
+            Book id: ${itemDetail.book_id}
+          </p>
+          <p>
+          Name: ${itemDetail.book_title}
+          </p>
+          <p>
+          Price: ${itemDetail.book_current_price}
+          </p>
+          <p>
+          Quantity: ${itemDetail.quantity}
+          </p>
+        </div>
+      `;
+      })
+      result += `</div>`;
+    });
+    
+
+
+
+    result += `</div>`;
+    result += `
+    <div style="text-align: center; width: 60%; background-color: #EFEFEF; border-top: 1px solid #333;">
+      <button type="button" onclick="BackOrderDetail()" class="Manage-btn-cancel">Back</button>
+    </div>
+    `;
+    OrdersDetailDOM.innerHTML = result;
+  }
+
+  displayOrders(orders) {
+    let result = '<div class="order-item-list"> <h3 class="cart-title">Order List</h3>';
+    
+    orders.forEach((item) => {
+      result += `
+      <div class="product order-item">
+  
+        <div class="product-desc">
+          <p class="product-title">
+            Order id: ${item.order_id}
+          </p>
+        </div>
+        <div class = "list-btn-item">
+          <button class="btn getDetail" data-id=${item.order_id}>
+            Detail
+          </button>
+        </div>
+      </div>
+      `;
+    });
+
+    result += `</div>`;
+    result += `
+    <div style="text-align: center; width: 60%; background-color: #EFEFEF; border-top: 1px solid #333;">
+      <button type="button" onclick="BackOrder()" class="Manage-btn-cancel">Back</button>
+    </div>
+    `;
+    OrdersDOM.innerHTML = result;
+  }
+  displayCategory(categorys) {
+    let result = '<span>Thể loại</span>';
+    console.log("categorys");
+    
+    categorys.forEach((item) => {
+      result += `
+      <button class="btn-category" data-id = ${item.category_id}>${item.category_name}</button>
+      `;
+    });
+
+    categoryDOM.innerHTML = result;
+  }
   displayProducts(products) {
     let result = '';
     console.log("display");
@@ -169,45 +338,134 @@ class UI {
   }
 
   // =============================================
+
+  // ============================================= getUser
+
+  getUserId() {
+    const Enterbtn = document.querySelector('.Manage-user-btn'); 
+    console.log("Enterbtn:",Enterbtn);
+    Enterbtn.addEventListener('click', () => {
+      var userID = document.querySelector('.input-UserId').value;
+      fetch(`https://db-stookbore-ass2.onrender.com/v1/user/orders?user_id=${userID}`)
+        .then(response => response.json())
+        .then(data => {
+            allOrders = data.data;
+            console.log("get all order",allOrders);
+            this.displayOrders(allOrders);
+            UserhideBackdrop();
+            this.getDetailBtn(); 
+        })
+        .catch(error => {
+            console.error('Error fetching books:', error);
+        });
+        OrdersDOM.style.display = "flex";
+    });
+  }
+
+  // ============================================= getUser End
+
+
+
+  // ============================================= Detail
+  getDetailBtn() {
+    const Enterbtns = [...document.querySelectorAll('.getDetail')];
+    Enterbtns.forEach((btn) =>{
+      console.log("btn detail:", btn);
+      const order_id = parseInt(btn.dataset.id);
+      btn.addEventListener('click', (e) => {
+        fetch(`https://db-stookbore-ass2.onrender.com/v1/user/order?order_id=${order_id}`)
+        .then(response => response.json())
+        .then(data => {
+            OrdersDetail = [...[],(data.data)];
+            console.log("get order Detail",OrdersDetail);
+            this.displayOrdersDetail(OrdersDetail);
+            HideOrder();
+        })
+        .catch(error => {
+            console.error('Error fetching books:', error);
+        });
+        OrdersDetailDOM.style.display = "flex";
+      });
+    })
+  }
+  // ============================================= Detail End
+
+
   deleteProductsBtns() {
     const deleteProBtns = [...document.querySelectorAll('.delete-product')];
     deleteProBtns.forEach((btn) => {
       const book_id = btn.dataset.id;
       btn.addEventListener('click', (e) => {
-        // console.log("tôi ấn vô id = " + id);
         const index = productsData.findIndex((item) => item.book_id === parseInt(book_id));
-        console.log("is " + index);
         if (index !== -1) {
-          console.log("chạy thôi");
-          console.log(productsData);
           productsData.splice(index, 1);
-          console.log(btn.parentNode.parentNode);
           productsDOM.removeChild(btn.parentNode.parentNode);
           Storage.saveProducts(productsData);
-          // productsDOM.innerHTML = "";
-          // this.displayProducts(productsData);
-          // this.getCartBtns();
         }
         
       });
       
     });
   }
+  reverseItem() {
+    var mySelect = document.getElementById("sortPro");
+
+    mySelect.addEventListener("change",async function() {
+    // Lấy giá trị của lựa chọn được chọn
+    var selectedValue = mySelect.value;
+    const apiIncrease = `https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=1&sortByPrice=${selectedValue}`;
+    try {
+      const response =await fetch(apiIncrease);
+      const data =await response.json();
+      productsDat = data.data;
+      // Call functions or perform operations that depend on productsDat here
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+    // Hiển thị giá trị trong console
+    // ===============================
+    this.displayProducts(productsDat);
+    this.getCartBtns();
+  }.bind(this));
+  
+}
   //======> Get products & add to shopping cart <=====
+  getCateBtns() {
+    const cateBtns = [...document.querySelectorAll('.btn-category')];
+    cateBtns.forEach((btn) => {
+      const cate_id = parseInt(btn.dataset.id);
+      btn.addEventListener('click', async function() {
+        const apiCateBook = `https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=${cate_id}`;
+        try {
+          const response = await fetch(apiCateBook);
+          const data = await response.json();
+          productsData = data.data;
+          
+          // Call functions or perform operations that depend on productsDat here
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+        this.displayProducts(productsData);
+        this.getCartBtns();
+        // Storage.saveProducts(productsDat);
+      }.bind(this));
+    })
+  }
+
   getCartBtns() {
     //-> btns are NodeList -> to convert NodeList to Array
     const addCartBtns = [...document.querySelectorAll('.add-to-cart')];
-    // console.log(addCartBtns);
+    console.log("addCartBtns cua getCart: ",addCartBtns);
 
-    buttonsDOM = addCartBtns;
+    buttonsDOMDOM = addCartBtns;
 
     //-> display products on cart
     addCartBtns.forEach((btn) => {
-      // console.log(btn.dataset.id);getProducts(id)
       const book_id = btn.dataset.id;
 
       //-> check if product is in the cart
-      const isExist = cart.find((p) => p.book_id === book_id);
+      const isExist = cart.find((p) => p.book_id === parseInt(book_id));
 
       if (isExist) {
         btn.textContent = 'Added';
@@ -288,8 +546,8 @@ class UI {
 
     //-> addCartItem to Modal
     cart.forEach((cartItem) => {
-      const addedCart = document.querySelector(`[data-id="${cartItem.book_id}"]`);
-
+      const addedCart = document.querySelector(`[data-id="${cartItem.book_id}"].add-to-cart`);
+      console.log("!!!", addedCart);
       if (addedCart) {
         addedCart.textContent = 'Added';
         addedCart.disabled = true;
@@ -394,21 +652,25 @@ class UI {
   }
 
   removeItem(book_id) {
-    // console.log(id);
     //-> update cart
-    cart = cart.filter((c) => c.book_id !== book_id);
+    cart = cart.filter((c) => c.book_id !== parseInt(book_id));
 
     //-> update total price & cart items
     this.setCartValue(cart);
 
     //-> update localStorage
     Storage.saveCart(cart);
-
+    
     //-> get carts  and update text and disabled
-    const button = buttonsDOM.find(
+    var button = buttonsDOMDOM.find(
       (btn) => parseInt(btn.dataset.id) === parseInt(book_id)
     );
-
+    if (!button) {
+      button = buttonsDOM.find(
+        (btn) => parseInt(btn.dataset.id) === parseInt(book_id)
+      ); 
+    }
+    console.log("Butto remove", button);
     button.textContent = 'Buy';
     button.disabled = false;
   }
@@ -418,7 +680,7 @@ class UI {
     searchInput.addEventListener('input', (e) => {
       const searchValue = e.target.value.toLowerCase();
 
-      const filteredProducts = productsData.filter((product) => {
+      const filteredProducts = productsDat.filter((product) => {
         return product.title.toLowerCase().includes(searchValue);
       });
 
@@ -432,10 +694,8 @@ class UI {
 class Storage {
   // save loaded products and set "products" on localStorage
   static saveProducts(products) {
-    console.log("Tôi có chạy saveProducts mà");
     localStorage.setItem('products', JSON.stringify(products));
   }
-
   static getProducts(book_id) {
     const _products = JSON.parse(localStorage.getItem('products'));
     console.log("get product i: ", _products);
@@ -446,7 +706,7 @@ class Storage {
 
   static getProductss() {
     const _products = JSON.parse(localStorage.getItem('products'));
-    console.log(_products);
+
     // return JSON.parse(localStorage.getItem('products'));
     return _products;
   }
@@ -462,36 +722,65 @@ class Storage {
 }
 
 
-console.log(productsData);
 /*================ Show products on DOM ===============*/
 document.addEventListener('DOMContentLoaded', async function() {
+  // Cater_id
+  const ui = new UI();
+  const apiCateBook = `https://db-stookbore-ass2.onrender.com/v1/user/books`;
+        try {
+          const response = await fetch(apiCateBook);
+          const data = await response.json();
+          productsDat = data.data;
+          ui.displayProducts(productsDat);
+          ui.getCartBtns();
+          const addCartBtns = [...document.querySelectorAll('.add-to-cart')];
 
-
+          buttonsDOM = addCartBtns;
+          productsData = productsDat;
+          console.log("DOM", buttonsDOM);
+          Storage.saveProducts(productsDat);
+          // Call functions or perform operations that depend on productsDat here
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
   try {
-    const response = await fetch(apiUrl);
+    const response = await fetch(apiUrlCategory);
     const data = await response.json();
-    productsDat = data.data;
-    console.log("data của anh Phú:" + productsDat);
-
-    // Call functions or perform operations that depend on productsDat here
-    processData();
+    categoryDat = data.data;
+    
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+  console.log("Beforehehe");
+  // try {
+  //   const response = await fetch(apiUrl);
+  //   const data = await response.json();
+  //   productsDat = data.data;
+    
+  //   // Call functions or perform operations that depend on productsDat here
+  //   processData();
+  // } catch (error) {
+  //   console.error('Error fetching data:', error);
+  // }
 
   
   console.log("chay cai nay");
   const products = new Products();
-  const productsDT = productsDat;
+  // const productsDT = productsDat;
   // console.log(products.getProducts());
   // console.log("get Products: "+Storage.getProductss());
-  const ui = new UI();
+  
   //-> display products on DOM
-  ui.displayProducts(productsDT);
+  ui.displayCategory(categoryDat);
+  ui.getCateBtns(); 
 
-  //-> get buttons
-  ui.getCartBtns();
+  // ui.displayProducts(productsDat);
+
+  //-> get 
+  ui.reverseItem();
+  // ui.getCartBtns();
   ui.deleteProductsBtns();
+  
   //-> get card and set up app
   ui.setUpApp();
 
@@ -499,8 +788,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   ui.searchItem();
   
+
+  ui.getUserId();
   //-> Display saved products on page loading
-  Storage.saveProducts(productsDT);
+  // Storage.saveProducts(productsDat);
 
 });
 
