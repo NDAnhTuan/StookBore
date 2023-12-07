@@ -1,6 +1,6 @@
 /*=================== Document Title ==================*/
 let alertShow = false;
-
+var cateee;
 setInterval(() => {
   document.title = 'StookBore 😍';
 }, 1000);
@@ -413,7 +413,7 @@ class UI {
     mySelect.addEventListener("change",async function() {
     // Lấy giá trị của lựa chọn được chọn
     var selectedValue = mySelect.value;
-    const apiIncrease = `https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=1&sortByPrice=${selectedValue}`;
+    const apiIncrease = `https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=${cateee}&sortByPrice=${selectedValue}`;
     try {
       const response =await fetch(apiIncrease);
       const data =await response.json();
@@ -436,6 +436,7 @@ class UI {
     cateBtns.forEach((btn) => {
       const cate_id = parseInt(btn.dataset.id);
       btn.addEventListener('click', async function() {
+        cateee = btn.dataset.id;
         const apiCateBook = `https://db-stookbore-ass2.onrender.com/v1/user/books?category_id=${cate_id}`;
         try {
           const response = await fetch(apiCateBook);
