@@ -323,10 +323,10 @@ class UI {
           <button class="btn add-to-cart" data-id=${item.book_id}>
             Buy
           </button>
-          <button class="btn delete-product" data-id=${item.book_id}>
+          <button class="btn delete-product" onClick="showDeleteConfirmation(${item.book_id})" data-id=${item.book_id}>
             Delete
           </button>
-          <button class="btn edit-product" data-id=${item.book_id}>
+          <button class="btn edit-product" onClick="showEditForm(${item.book_id})" data-id=${item.book_id}>
             Edit
           </button>
         </div>
@@ -391,22 +391,22 @@ class UI {
   // ============================================= Detail End
 
 
-  deleteProductsBtns() {
-    const deleteProBtns = [...document.querySelectorAll('.delete-product')];
-    deleteProBtns.forEach((btn) => {
-      const book_id = btn.dataset.id;
-      btn.addEventListener('click', (e) => {
-        const index = productsData.findIndex((item) => item.book_id === parseInt(book_id));
-        if (index !== -1) {
-          productsData.splice(index, 1);
-          productsDOM.removeChild(btn.parentNode.parentNode);
-          Storage.saveProducts(productsData);
-        }
+  // deleteProductsBtns() {
+  //   const deleteProBtns = [...document.querySelectorAll('.delete-product')];
+  //   deleteProBtns.forEach((btn) => {
+  //     const book_id = btn.dataset.id;
+  //     btn.addEventListener('click', (e) => {
+  //       const index = productsData.findIndex((item) => item.book_id === parseInt(book_id));
+  //       if (index !== -1) {
+  //         productsData.splice(index, 1);
+  //         productsDOM.removeChild(btn.parentNode.parentNode);
+  //         Storage.saveProducts(productsData);
+  //       }
         
-      });
+  //     });
       
-    });
-  }
+  //   });
+  // }
   reverseItem() {
     var mySelect = document.getElementById("sortPro");
 
@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   //-> get 
   ui.reverseItem();
   // ui.getCartBtns();
-  ui.deleteProductsBtns();
+  // ui.deleteProductsBtns();
   
   //-> get card and set up app
   ui.setUpApp();

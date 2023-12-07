@@ -154,3 +154,131 @@ function addBook() {
 }
     
 //==========================END ADD BOOK===========================
+
+//=========================DELETE BOOK START============================
+let bookIdToDelete;
+
+function showDeleteConfirmation(bookId) {
+    bookIdToDelete = bookId;
+    console.log(bookIdToDelete);
+  document.getElementById('confirmation-modal').style.display = 'flex';
+}
+
+function hideBackdropDeleteBook() {
+  document.getElementById('confirmation-modal').style.display = 'none';
+}
+
+function cancelDelete() {
+  hideBackdropDeleteBook();
+}
+
+function deleteProductsBtns() {
+    const apiUrl = `https://db-stookbore-ass2.onrender.com/v1/user/book?book_id=${bookIdToDelete}`;
+    fetch(apiUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+    })
+    .then(data => {
+    console.log(`Book with ID ${bookIdToDelete} deleted successfully`);
+        alert('Book deleted successfully. Reload the page!')
+        hideBackdropDeleteBook();
+    })
+    .catch(error => {
+    console.error('Error deleting book:', error);
+    alert(`Sorry. This book is in an order. You can't delete it!`);
+    });
+}
+//=========================DELETE BOOK END============================
+
+
+//=========================EDIT BOOK START===========================
+const editBackdrop = document.getElementById('edit-backdrop');
+const editForm = document.getElementById('edit-form');
+let allBooks = []; // Store all books fetched from the API
+
+function showEditForm(bookId) {
+    const aUrl = `https://db-stookbore-ass2.onrender.com/v1/user/books`;
+    fetch(aUrl)
+        .then(response => response.json())
+        .then(data => {
+            allBooks = data.data;
+
+            const bookToEdit = allBooks.find(book => book.book_id === bookId);
+
+            if (bookToEdit) {
+                console.log(bookToEdit);
+                editBackdrop.style.display = 'flex';
+                populateEditForm(bookToEdit);
+            } else {
+                console.error(`Book with ID ${bookId} not found.`);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching books:', error);
+        });
+}
+
+
+function populateEditForm(bookDetails) {
+    if (editForm) {
+        editForm.querySelector('#edit-ID').value = bookDetails.book_id;
+        editForm.querySelector('#edit-title').value = bookDetails.title;
+        editForm.querySelector('#edit-description').value = bookDetails.descriptions;
+        editForm.querySelector('#edit-publisher').value = bookDetails.publisher;
+        editForm.querySelector('#edit-author').value = bookDetails.author;
+        editForm.querySelector('#edit-stock').value = bookDetails.stock;
+        editForm.querySelector('#edit-price').value = bookDetails.current_price;
+        editForm.querySelector('#edit-edition').value = bookDetails.edition_version;
+        editForm.querySelector('#edit-category').value = bookDetails.category_id;
+    } else {
+        console.error('Error: editForm is null or undefined.');
+    }
+}
+
+function hideEditBackdrop() {
+  editBackdrop.style.display = 'none';
+}
+
+function updateBookDetails() {
+  const updatedDetails = {
+    book_id: editForm.querySelector('#edit-ID').value,
+    title: editForm.querySelector('#edit-title').value,
+    descriptions: editForm.querySelector('#edit-description').value,
+    publisher: editForm.querySelector('#edit-publisher').value,
+    author: editForm.querySelector('#edit-author').value,
+    stock: editForm.querySelector('#edit-stock').value,
+    current_price: editForm.querySelector('#edit-price').value,
+    edition_version: editForm.querySelector('#edit-edition').value,
+    category_id: editForm.querySelector('#edit-category').value
+  };
+  fetch('https://db-stookbore-ass2.onrender.com/v1/user/book', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedDetails),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+        console.log(`Book with ID ${updatedDetails.book_id} updated successfully`);
+        alert(`Book with ID ${updatedDetails.book_id} updated successfully`);
+      hideEditBackdrop();
+    })
+    .catch(error => {
+      console.error('Error updating book details:', error);
+    });
+}
+//=========================EDIT BOOK END============================
