@@ -1,0 +1,481 @@
+.lamdep-firsttitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0px;
+    width: 100%;
+}
+
+.lamdep-firsttitle span {
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.lamdep-firsttitle span:nth-child(3) {
+    color: #C92127;
+}
+
+.lamdep-container {
+    display: flex;
+    
+    width: 100%;
+}
+
+.lamdep-container-left {
+    width: 30%;
+    margin-right: 10px;
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+}
+
+.lamdep-container-right {
+    /* display: none; */
+    width: 70%;
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+}
+
+.nhomsanpham {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.nhomsanpham span {
+    font-size: 14px;
+    padding: 6px;
+}
+
+.nhomsanpham span:nth-child(1) {
+    font-weight: bold;
+}
+
+.nhomsanpham span:nth-child(2) {
+    color: gray;
+    margin-left: 10px;
+}
+
+.nhomsanpham span:nth-child(3) {
+    color: #C92127;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.nhomsanpham span:nth-child(4) {
+    color: gray;
+    margin-left: 15px;
+}
+
+.filter-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.filter-box h2 {
+    font-size: 14px;
+    padding: 6px;
+}
+
+.option-checkbox {
+    display: flex;
+    align-items: flex-start;
+    padding: 5px;
+
+}
+
+.option-checkbox input::before {
+    background: transparent url(https://cdn0.fahasa.com/skin/frontend/base/default/images/manapro_filtercheckboxes/ico_uncheck.png) 0 50% no-repeat;
+    content: "";
+    visibility: visible;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.option-checkbox input {
+    margin-right: 10px;
+    margin-left: 20px;
+    visibility: hidden;
+    
+}
+
+.option-checkbox input:checked {
+    visibility: hidden;
+}
+.option-checkbox input:checked::before {
+    display: inline-block;
+    background: transparent url(https://cdn0.fahasa.com/skin/frontend/base/default/images/manapro_filtercheckboxes/ico_checked.png) 0 50% no-repeat;
+    content: "";
+    visibility: visible;
+    width: 16px;
+    height: 16px;
+}
+
+.option-checkbox label {
+    font-size: 14px;
+    color: gray;
+
+}
+
+.option-checkbox label:hover {
+    color: #C92127;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    transform: translate(5px, 0px);
+}
+
+.m-xemthem {
+    margin-top: 10px;
+    color: #F7941E;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    width: fit-content;
+    padding-right: 20px;
+    background: url('https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_morong.png') no-repeat right;
+}
+
+.sapxeptheo {
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    border-bottom: 1px solid #E5E5E5;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.sapxeptheo button {
+    position: absolute;
+    right: 30px;
+}
+
+.sapxeptheo .selectbox-dropdown-macdinh {
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    margin-left: 30px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 10px 30px;
+}
+
+.icon-arrow-down {
+    content: "";
+    display: inline-block;
+    margin-left: 10px;
+    width: 15px;
+    height: 9px;
+    background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_dropdown.png) no-repeat center left;
+}
+
+/* .sapxeptheo .selectbox-dropdown-macdinh::after {
+    content: "";
+    display: inline-block;
+    margin-left: 10px;
+    width: 15px;
+    height: 9px;
+    background: url(https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/ico_dropdown.png) no-repeat center left;
+} */
+
+.selectbox-dropdown {
+    position: relative;
+}
+
+.selectbox-dropdown:hover .selectbox-dropdown-content {
+    display: flex;
+
+}
+
+.selectbox-dropdown-content {
+    z-index: 20;
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    width: calc(100% - 57px);
+    top: calc(100% + 6px);
+    border-top: 0px;
+    left: 19px;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #E5E5E5;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.selectbox-dropdown-content a {
+    font-size: 14px;
+    padding: 6px;
+    color: gray;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    
+    transition: all 0.3s ease-in-out;
+}
+
+.selectbox-dropdown-content a:hover {
+    background-color: #F7941E;
+    transform: scale(1.1);
+    color: white;
+}
+
+.lamdepi-container {
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: white;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.lamdepi-container-item {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 8px;
+    width: calc(100%/3);
+    margin-top: 10px;
+}
+
+.lamdepi-container-item:hover {
+    box-shadow: 0 0 5px #ccc;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.lamdepi-container-item:hover .flashsale-container-item-image {
+    box-shadow: 0 -5px 5px -5px #ccc, -5px 0 5px -5px #ccc, 5px 0 5px -5px #ccc;
+}
+
+
+.lamdepi-container-item-image {
+    height: 40%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lamdepi-container-item-image img {
+    width: 70%;
+    height: auto;
+}
+
+.product-desc {
+  height: 50px;
+}
+
+.lamdepi-price-special {
+    font-size: 1.15em;
+    color: #C92127;
+    font-weight: 600;
+}
+
+.lamdepi-price-old {
+    display: none;
+    color: #888888;
+    text-decoration: line-through;
+    font-size: 0.9em;
+}
+
+.list-btn-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-to-cart, .delete-product, .edit-product, .add-product {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--mainButton);
+    color: var(--bodyColor);
+    padding: 10px 12px;
+    margin: 35px 0 10px 0;
+    font-weight: bolder;
+    box-shadow: var(--mainShadow);
+    cursor: pointer;
+}
+
+.add-to-cart, .add-product {
+  background-color: #d02424;
+}
+
+/* <!-- ========== Modal - Cart Section ========= --!> */
+
+.backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(7px);
+    z-index: 5;
+  }
+  
+  .cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    width: 60%;
+    padding: 1.2rem;
+    min-height: 240px;
+    left: 0;
+    right: 0;
+    top: -100%;
+    background-color: var(--bodyColor);
+    border: 1px solid #ccc;
+    box-shadow: 0 20px 120px rgba(0, 0, 0, 0.07);
+    border-radius: 8px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.88, 1.05, 1, 0.94);
+    z-index: 10;
+  }
+
+  .cart-content {
+    overflow: auto;
+    max-height: 320px;
+  }
+  
+  .cart-title {
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+  
+  .cart-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .cart-item-img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .cart-item-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 60%;
+    border-bottom: 1px solid #7a74747c;
+    padding-bottom: 10px;
+  }
+  
+  .cart-item-desc h4 {
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .cart-item-desc h5 {
+    margin-top: 10px;
+    color: var(--primaryColor);
+    text-align: center;
+  }
+  
+  .cart-item-controller {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .cart-item-controller p {
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--mainButton);
+  }
+  
+  .trash,
+  .arrow-down,
+  .arrow-up {
+    cursor: pointer;
+  }
+  
+  .trash {
+    padding-left: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .cart-item-controller .arrow-up {
+    font-weight: bolder;
+    cursor: pointer;
+    color: var(--primaryColor);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+  
+  .cart-item-controller .arrow-down {
+    color: var(--mainRed);
+    cursor: pointer;
+    font-weight: bolder;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+  }
+  
+  .cart-footer {
+    text-align: center;
+  }
+  
+  .cart-footer span {
+    display: inline-block;
+    margin-right: 1rem;
+    font-size: large;
+  }
+  
+  .clear-cart {
+    background-color: #fff;
+    border: 1px solid var(--primaryColor);
+    padding: 0.2rem 0.5rem;
+    color: var(--mainRed);
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .clear-cart:hover {
+    color: var(--bodyColor);
+    background-color: var(--mainButton);
+  }
+  
+  .cart-item-confirm {
+    background-color: #fff;
+    color: var(--mainButton);
+    border: 1px solid var(--primaryColor);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .cart-item-confirm:hover {
+    color: var(--bodyColor);
+    background-color: var(--mainButton);
+  }
