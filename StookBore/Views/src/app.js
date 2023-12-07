@@ -316,7 +316,7 @@ class UI {
             ${item.title}
           </p>
           <p class="product-price">
-            $ ${item.current_price}
+            VND ${item.current_price}
           </p>
         </div>
         <div class = "list-btn-item">
@@ -508,7 +508,7 @@ class UI {
       return acc + curr.quantity * curr.current_price;
     }, 0);
 
-    cartTotal.textContent = `Total price: $ ${totalPrice.toFixed(2)}`;
+    cartTotal.textContent = `Total price: VND ${totalPrice.toFixed(2)}`;
 
     cartItemsCounter.textContent = tempCartItems;
   }
@@ -525,7 +525,7 @@ class UI {
 
     <div class="cart-item-desc">
       <h4>${cartItem.title}</h4>
-      <h5>$ ${cartItem.current_price}</h5>
+      <h5>VND ${cartItem.current_price}</h5>
     </div>
 
     <div class="cart-item-controller">
@@ -539,6 +539,82 @@ class UI {
 
     cartContent.append(div);
   }
+
+  // Add order
+  addOrder() {
+    const confirmOrder = document.querySelector('.cart-item-confirm');
+
+    confirmOrder.addEventListener('click', () => {
+      if (cart.length === 0) {
+        this.clearCart();
+        return;
+      }
+
+      const quant = [...document.querySelectorAll(`.cart-item-controller`)];
+      console.log("quanttttttttt", quant);
+      let temp_quant = [];
+      quant.forEach((q) => {
+        temp_quant.push(parseInt(q.innerText));
+      })
+      console.log("temp_quant", temp_quant);
+
+
+      const idBook = [...document.querySelectorAll(`.ti-trash.trash`)];
+      console.log("idBookkkkk", idBook);
+      let temp_idBook = [];
+      idBook.forEach((idd) => {
+        temp_idBook.push(parseInt(idd.dataset.id));
+      })
+      console.log("temp_idBook", temp_idBook);
+
+      let temp_books = [];
+      // Assuming both arrays have the same length
+      for (let i = 0; i < temp_idBook.length; i++) {
+        const temp_b = {
+          book_id: temp_idBook[i],
+          quantity: temp_quant[i]
+        };
+        temp_books.push(temp_b);
+      }
+
+      console.log("books", temp_books);
+      const orderAPI = `https://db-stookbore-ass2.onrender.com/v1/user/order`;
+      const orderStuff = {
+        shipment_method: "Fast",
+        shipment_price: 20000,
+        street: "123",
+        district: "Dong Hoa",
+        city: "HCM",
+        country: "Vietnam",
+        payment_method: "Cash",
+        client_id: 1,
+        books:  temp_books
+      }
+
+        fetch(orderAPI, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderStuff)
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => console.log(data))
+        .catch(error => {
+          console.error('Error:', error);
+          hideBackdrop();
+        });
+        this.clearCart();
+        alert("Order successfully!");
+    })
+
+      
+  };
 
   //======> Save information when page refreshed <=====
   setUpApp() {
@@ -791,6 +867,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   
 
   ui.getUserId();
+
+  ui.addOrder();
   //-> Display saved products on page loading
   // Storage.saveProducts(productsDat);
 
