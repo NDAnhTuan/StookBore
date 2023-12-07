@@ -45,7 +45,7 @@ async function getSingleOrder({
             book_author,
             book_stock,
             book_current_price,
-            book_quantity,
+            quantity,
             book_edition_version,
             book_category
         } = book
@@ -58,7 +58,7 @@ async function getSingleOrder({
             book_author,
             book_stock,
             book_current_price,
-            book_quantity,
+            quantity,
             book_edition_version,
             book_category
         }
