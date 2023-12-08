@@ -142,9 +142,9 @@ function addBook() {
         },
         body: JSON.stringify(Object.fromEntries(formData)),
     })
-    .then(response => {
+    .then(async (response) => {
         if (!response.ok) {
-            alert('Error adding book: ',response.message);
+            alert('Error adding book: ', await response.json().message);
         } else {
             alert('Book added successfully');
         }
