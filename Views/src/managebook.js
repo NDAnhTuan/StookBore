@@ -143,18 +143,25 @@ function addBook() {
         body: JSON.stringify(Object.fromEntries(formData)),
     })
     .then(async (response) => {
-        if (!response.ok) {
-            alert('Error adding book: ', await response.json().message);
+
+        const status = response.ok;
+        const data = await response.json();
+
+        if (!status) {
+            alert(`Error adding book: ${data.message}`);
         } else {
             alert('Book added successfully');
         }
+
         hideBackdrop();
-        return response.json();
+        return { status, data };
     })
     .catch(error => {
+
         console.error('Error adding book:', error);
         alert('Error adding book. Check the console for details.');
         hideBackdrop();
+
     });
     
 }
