@@ -142,16 +142,22 @@ function addBook() {
         },
         body: JSON.stringify(Object.fromEntries(formData)),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            alert('Error adding book: ',response.message);
+        }
+        return response.json();
+    })
     .then(data => {
-        alert('Book Add successfully');
+        alert('Book added successfully');
         hideBackdrop();
     })
     .catch(error => {
-        // console.error('Error adding book:', error);
-        alert('Error adding book:', error)
+        console.error('Error adding book:', error);
+        alert('Error adding book. Check the console for details.');
         hideBackdrop();
     });
+    
 }
     
 //==========================END ADD BOOK===========================
