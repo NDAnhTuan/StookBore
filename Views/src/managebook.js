@@ -145,12 +145,11 @@ function addBook() {
     .then(response => {
         if (!response.ok) {
             alert('Error adding book: ',response.message);
+        } else {
+            alert('Book added successfully');
         }
-        return response.json();
-    })
-    .then(data => {
-        alert('Book added successfully');
         hideBackdrop();
+        return response.json();
     })
     .catch(error => {
         console.error('Error adding book:', error);
