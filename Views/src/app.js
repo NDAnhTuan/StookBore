@@ -755,7 +755,7 @@ class UI {
   //======> Search Products <======
   searchItem() {
     searchInput.addEventListener('input', (e) => {
-      const searchValue = e.target.value.toLowerCase();
+      const searchValue = e.target.value.toLowerCase().trim();
 
       const filteredProducts = productsDat.filter((product) => {
         return product.title.toLowerCase().includes(searchValue);
