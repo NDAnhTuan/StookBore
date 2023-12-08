@@ -4,17 +4,17 @@ DROP TABLE IF EXISTS grand_total_view;
 DROP TRIGGER IF EXISTS order_update_grand_total;
 DROP TRIGGER IF EXISTS check_promotion_validity;
 
-
-CREATE TEMPORARY TABLE grand_total_view (
+-- Tạo bảng tính tiền đơn hàng
+CREATE TABLE grand_total_view (
 	order_id INT NOT NULL,
     sub_total INT NOT NULL, 
 	grand_total INT NOT NULL
 );
 
-
 SELECT *
    FROM grand_total_view;
 
+-- Chuẩn bị dữ liệu trong bảng grand_total_view chờ trigger Contain để cộng dồn vào (set order_id, 0, ship_temp)
 delimiter // 
 CREATE TRIGGER create_grand_total_view
 AFTER INSERT ON Orders
@@ -31,6 +31,7 @@ VALUES ( NEW.order_id, 0, ship_temp);
 END //
 delimiter ;
 
+-- Tính tổng tiền đơn hàng bao gồm phí vận chuyển (cộng dồn vào)
 delimiter // 
 CREATE TRIGGER order_update_grand_total
 AFTER INSERT ON Contain
@@ -54,6 +55,8 @@ SET ship_temp = (
 END //
 delimiter ;
 
+
+-- Tính tiền đơn hàng sau khi áp mã giảm giá hoặc quà tặng
 delimiter // 
 
 CREATE TRIGGER check_promotion_validity 
