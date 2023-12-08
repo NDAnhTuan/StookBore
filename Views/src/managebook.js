@@ -148,7 +148,8 @@ function addBook() {
         hideBackdrop();
     })
     .catch(error => {
-        console.error('Error adding book:', error);
+        // console.error('Error adding book:', error);
+        alert('Error adding book:', error)
         hideBackdrop();
     });
 }
