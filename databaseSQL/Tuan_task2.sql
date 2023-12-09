@@ -78,7 +78,7 @@ BEGIN
              
             	SET check_type = (SELECT promotion_type 
 			 FROM Promotion WHERE promotion_id = NEW.promotion_id);
-        	IF NOT check_type THEN
+        	IF check_type THEN
 			BEGIN
 				DECLARE amount_grant DOUBLE DEFAULT 0;
                     		DECLARE grant_temp DOUBLE DEFAULT 0;
